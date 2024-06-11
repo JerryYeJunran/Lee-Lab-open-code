@@ -270,6 +270,7 @@ example:
 > methyGff -B -o methyGff_3D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_3D107.methratio.txt &
 > methyGff -B -o methyGff_0DWT.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_0DWT.methratio.txt &
 > methyGff -B -o methyGff_0D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_0D107.methratio.txt &
+
 `-P`
 > methyGff -P -o methyGff_promoter_7DWT.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_7DWT.methratio.txt &
 > methyGff -P -o methyGff_promoter_7D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_7D107.methratio.txt &
