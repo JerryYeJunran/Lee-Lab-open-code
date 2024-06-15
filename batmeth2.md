@@ -6,42 +6,55 @@ https://batmeth2-docs.readthedocs.io/en/latest/index.html
 ```
 
 #### 0.2. fastp
-
-> conda install fastp
-
+```
+conda install fastp
+```
 #### 0.3. samtools
-
-> conda install samtools
-
+```
+conda install samtools
+```
 #### 0.4. libpng
 
 ```
 https://askubuntu.com/questions/895897/error-while-loading-shared-libraries-libpng12-so-0
 ```
-> **install autogen**
-> sudo apt-get update
-> sudo apt-get upgrade 
-> sudo apt-get install libtool autoconf build-essential pkg-config automake tcsh
-> 
-> wget http://archive.ubuntu.com/ubuntu/pool/main/libp/libpng/libpng_1.2.54.orig.tar.xz
+**install autogen**
+```
+sudo apt-get update
 
-> **download libpng**
-> tar xvf  libpng_1.2.54.orig.tar.xz
-> cd libpng-1.2.54
-> ./autogen.sh
-> ./configure
-> make -j8 
-> sudo make install
-> sudo ldconfig
+sudo apt-get upgrade 
+
+sudo apt-get install libtool autoconf build-essential pkg-config automake tcsh
+
+wget http://archive.ubuntu.com/ubuntu/pool/main/libp/libpng/libpng_1.2.54.orig.tar.xz
+```
+
+**download libpng**
+```
+tar xvf  libpng_1.2.54.orig.tar.xz
+
+cd libpng-1.2.54
+
+./autogen.sh
+
+./configure
+
+make -j8 
+
+sudo make install
+
+sudo ldconfig
+```
 
 ## 1. build index referemce genome
 ### 1.1 create path: ./batmeth_index and download ref_genome.fa
 
+> download fasta file, all chromosome sequences, from TAIR10
 ```
-download fasta file, all chromosome sequences, from TAIR10
+cd ./batmeth
+
+wget <"link to TAIR10 fasta file">
 ```
-> cd ./batmeth
-> wget <"link to TAIR10 fasta file">
 
 ### 1.2 index reference genome
 
@@ -65,29 +78,43 @@ batmeth2 align\
 *fastp: /home/vcm/miniconda3/envs/batmeth/bin/fastp*
 ```
 > batmeth2 align --fastp /home/vcm/miniconda3/envs/batmeth/bin/fastp -g ./batmeth2_index/TAIR10_chr_all.fas -1 7days107-LFK10435_L1_1.fq.gz -2 7days107-LFK10435_L1_2.fq.gz -o align_7D107 -p 8 &
+>
 > batmeth2 align --fastp /home/vcm/miniconda3/envs/batmeth/bin/fastp -g ./batmeth2_index/TAIR10_chr_all.fas -1 7daysWT-LFK10434_L1_1.fq.gz -2 7daysWT-LFK10434_L1_2.fq.gz -o align_7DWT -p 8 &
+>
 > batmeth2 align --fastp /home/vcm/miniconda3/envs/batmeth/bin/fastp -g ./batmeth2_index/TAIR10_chr_all.fas -1 3days107-LFK10433_L1_1.fq.gz -2 3days107-LFK10433_L1_2.fq.gz -o align_3D107 -p 8 &
+>
 > batmeth2 align --fastp /home/vcm/miniconda3/envs/batmeth/bin/fastp -g ./batmeth2_index/TAIR10_chr_all.fas -1 3daysWT-LFK10432_L1_1.fq.gz -2 3daysWT-LFK10432_L1_2.fq.gz -o align_3DWT -p 8 &
+>
 > batmeth2 align --fastp /home/vcm/miniconda3/envs/batmeth/bin/fastp -g ./batmeth2_index/TAIR10_chr_all.fas -1 S0day107-LFK10431_L1_1.fq.gz -2 S0day107-LFK10431_L1_2.fq.gz -o align_0D107 -p 8 &
+>
 > batmeth2 align --fastp /home/vcm/miniconda3/envs/batmeth/bin/fastp -g ./batmeth2_index/TAIR10_chr_all.fas -1 S0dayWT-LFK10430_L1_1.fq.gz -2 S0dayWT-LFK10430_L1_2.fq.gz -o align_0DWT -p 8 &
-
+>
 ```
 Or you can pause by pressing Ctrl+z, then type 'bg' in the shell.
 ```
 ## 3. Calculate DNA methylation level
 
+> with bam file:
 ```
-  with bam file:
-    batmeth calmeth [options] -g genome.fa  -b alignment.sort.bam -m output.methrario.txt
-  with sam file:
-    batmeth calmeth [options] -g genome.fa  -i alignment.sort.sam -m output.methrario.txt
+batmeth calmeth [options] -g genome.fa  -b alignment.sort.bam -m output.methrario.txt
 ```
+> with sam file:
+```
+batmeth calmeth [options] -g genome.fa  -i alignment.sort.sam -m output.methrario.txt
+```
+
 > batmeth2 calmeth -g ./batmeth2_index/TAIR10_chr_all.fas -b ./align_7D107.sort.bam -m calmeth_7D107 &
+>
 > batmeth2 calmeth -g ./batmeth2_index/TAIR10_chr_all.fas -b ./align_7DWT.sort.bam -m calmeth_7DWT &
+>
 > batmeth2 calmeth -g ./batmeth2_index/TAIR10_chr_all.fas -b ./align_3D107.sort.bam -m calmeth_3D107 &
+>
 > batmeth2 calmeth -g ./batmeth2_index/TAIR10_chr_all.fas -b ./align_3DWT.sort.bam -m calmeth_3DWT &
+>
 > batmeth2 calmeth -g ./batmeth2_index/TAIR10_chr_all.fas -b ./align_0D107.sort.bam -m calmeth_0D107 &
+>
 > batmeth2 calmeth -g ./batmeth2_index/TAIR10_chr_all.fas -b ./align_0DWT.sort.bam -m calmeth_0DWT &
+
 ```
 1. methratio
     Chromosome Loci Strand Context C_count CT_count methlevel eff_CT_count rev_G_count rev_GA_count MethContext 5context
@@ -117,9 +144,9 @@ Or you can pause by pressing Ctrl+z, then type 'bg' in the shell.
 ## 4. Convert methratio file to bigwig for IGV visualization
 #### Devided by 3 methylation types mCG, CHG, CHH, and total C
 #### 4.1 index reference genome fasta file
-
-> samtools faidx ./batmeth2_index/TAIR10_chr_all.fas
-
+```
+samtools faidx ./batmeth2_index/TAIR10_chr_all.fas
+```
 #### 4.2 transform methratio.txt to .bw
 
 ```
@@ -133,10 +160,15 @@ batmeth2: /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/batmeth2
 ```
 
 > python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/batmeth2_to_bigwig.py -sort ./batmeth2_index/TAIR10_chr_all.fas.fai calmeth_7D107.methratio.txt
+>
 > python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/batmeth2_to_bigwig.py -sort ./batmeth2_index/TAIR10_chr_all.fas.fai calmeth_7DWT.methratio.txt
+>
 > python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/batmeth2_to_bigwig.py -sort ./batmeth2_index/TAIR10_chr_all.fas.fai calmeth_3D107.methratio.txt
+>
 > python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/batmeth2_to_bigwig.py -sort ./batmeth2_index/TAIR10_chr_all.fas.fai calmeth_3DWT.methratio.txt
+>
 > python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/batmeth2_to_bigwig.py -sort ./batmeth2_index/TAIR10_chr_all.fas.fai calmeth_0D107.methratio.txt
+>
 > python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/batmeth2_to_bigwig.py -sort ./batmeth2_index/TAIR10_chr_all.fas.fai calmeth_0DWT.methratio.txt
 
 #### 4.3 download bigwig file to own computer and load into IGV
@@ -145,7 +177,7 @@ batmeth2: /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/batmeth2
 
 ## 5. Diff methylation calling
 
-```
+
 [ Main paramaters ]
 	-o_dm
 	output file
@@ -178,8 +210,8 @@ batmeth2: /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/batmeth2
 	-gz
 	gzip input file.
 	-h|--help
-```
-```
+
+
 [Output file]
 	1. DMC
 	# format
@@ -188,7 +220,7 @@ batmeth2: /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/batmeth2
 	2. DMR
 	# format
 	Chrom start end methlevelInSample1 methlevelInSample2 NdmcInRegion hypermdc,hypodmc
-```
+
 
 #### 5.1 get dmc and dmr results
 
@@ -204,6 +236,7 @@ BatMeth2 batDMR -g genome -L -o_dm dm.output.txt -1 [sample1.methC.txt replicate
 -2 [sample2.methC.txt replicates ..]
 ```
 **2. Auto define DMR region according the dmc**
+
 ***Recommended***
 ```
 BatMeth2 batDMR -g genome -o_dm dm.output.txt -o_dmr dmr.output.txt -1 [sample1.methC.txt replicates ..] \
@@ -211,7 +244,9 @@ BatMeth2 batDMR -g genome -o_dm dm.output.txt -o_dmr dmr.output.txt -1 [sample1.
 ```
 
 > batmeth2 batDMR -g ./batmeth2_index/TAIR10_chr_all.fas -o_dm batdmr_dm_7D.txt -o_dmr batdmr_dmr_7D.txt -1 calmeth_7DWT.methratio.txt -2 calmeth_7D107.methratio.txt &
+>
 > batmeth2 batDMR -g ./batmeth2_index/TAIR10_chr_all.fas -o_dm batdmr_dm_3D.txt -o_dmr batdmr_dmr_3D.txt -1 calmeth_0DWT.methratio.txt -2 calmeth_3D107.methratio.txt &
+>
 > batmeth2 batDMR -g ./batmeth2_index/TAIR10_chr_all.fas -o_dm batdmr_dm_0D.txt -o_dmr batdmr_dmr_0D.txt -1 calmeth_0DWT.methratio.txt -2 calmeth_0D107.methratio.txt &
 
 #### 5.2 obtained hyper、hypo dmc/dmr from dmc/dmr results
@@ -253,32 +288,44 @@ example:
 ## 7. Plot diff meth with batmeth
 
 #### 7.0 required installation
-
-> pip install numpy
-> pip install pandas
-> pip install matplotlib
-> pip install seaborn
-
+```
+pip install numpy
+pip install pandas
+pip install matplotlib
+pip install seaborn
+```
 #### 7.1 Plot methylation profile
-```
-[option] -B -P --TSS --TTS --GENE
-```
+
+> [option] -B -P --TSS --TTS --GENE
+
 `-B`
-> methyGff -B -o methyGff_7DWT.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_7DWT.methratio.txt &
-> methyGff -B -o methyGff_7D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_7D107.methratio.txt &
-> methyGff -B -o methyGff_3DWT.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_3DWT.methratio.txt &
-> methyGff -B -o methyGff_3D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_3D107.methratio.txt &
-> methyGff -B -o methyGff_0DWT.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_0DWT.methratio.txt &
-> methyGff -B -o methyGff_0D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_0D107.methratio.txt &
+```
+methyGff -B -o methyGff_7DWT.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_7DWT.methratio.txt &
 
+methyGff -B -o methyGff_7D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_7D107.methratio.txt &
+
+methyGff -B -o methyGff_3DWT.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_3DWT.methratio.txt &
+
+methyGff -B -o methyGff_3D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_3D107.methratio.txt &
+
+methyGff -B -o methyGff_0DWT.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_0DWT.methratio.txt &
+
+methyGff -B -o methyGff_0D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_0D107.methratio.txt &
+```
 `-P`
-> methyGff -P -o methyGff_promoter_7DWT.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_7DWT.methratio.txt &
-> methyGff -P -o methyGff_promoter_7D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_7D107.methratio.txt &
-> methyGff -P -o methyGff_promoter_3DWT.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_3DWT.methratio.txt &
-> methyGff -P -o methyGff_promoter_3D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_3D107.methratio.txt &
-> methyGff -P -o methyGff_promoter_0DWT.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_0DWT.methratio.txt &
-> methyGff -P -o methyGff_promoter_0D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_0D107.methratio.txt &
+```
+methyGff -P -o methyGff_promoter_7DWT.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_7DWT.methratio.txt &
 
+methyGff -P -o methyGff_promoter_7D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_7D107.methratio.txt &
+
+methyGff -P -o methyGff_promoter_3DWT.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_3DWT.methratio.txt &
+
+methyGff -P -o methyGff_promoter_3D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_3D107.methratio.txt &
+
+methyGff -P -o methyGff_promoter_0DWT.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_0DWT.methratio.txt &
+
+methyGff -P -o methyGff_promoter_0D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_0D107.methratio.txt &
+```
 #### 7.2 Visualization
 
 #### 7.2.1 plot profile - methylation line chart
@@ -287,6 +334,43 @@ example:
 #!# In file bt2profile.py, line 111:
 Remove the quotation mark at line 45 around the number 45. 
 ```
-> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_7DWT.meth.TSSprofile.txt methyGff_7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName plot_profile_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k
-> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_7DWT.meth.TSSprofile.txt methyGff_7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName plot_profile_center_7D.pdf -s 1 1 -xl up2k center down2k
+**A. Gene Body (-B)**
+
+**1. TSS, TES**
+
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_7DWT.meth.TSSprofile.txt methyGff_7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName plot_profile_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k &
+>
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_3DWT.meth.TSSprofile.txt methyGff_3D107.meth.TSSprofile.txt -l gene_3DWT gene_3D107 --outFileName plot_profile_TSSTES_3D.pdf -s 1 1 1 -xl up2k TSS TES down2k &
+>
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_0DWT.meth.TSSprofile.txt methyGff_0D107.meth.TSSprofile.txt -l gene_0DWT gene_0D107 --outFileName plot_profile_TSSTES_0D.pdf -s 1 1 1 -xl up2k TSS TES down2k &
+>
+
+**2. Center**
+
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_7DWT.meth.TSSprofile.txt methyGff_7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName plot_profile_center_7D.pdf -s 1 1 -xl up2k center down2k &
+>
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_3DWT.meth.TSSprofile.txt methyGff_3D107.meth.TSSprofile.txt -l gene_3DWT gene_3D107 --outFileName plot_profile_center_3D.pdf -s 1 1 -xl up2k center down2k &
+>
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_0DWT.meth.TSSprofile.txt methyGff_0D107.meth.TSSprofile.txt -l gene_0DWT gene_0D107 --outFileName plot_profile_center_0D.pdf -s 1 1 -xl up2k center down2k &
+>
+
+**B. Promoter**
+
+**1. TSS, TES**
+
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_promoter_7DWT.meth.TSSprofile.txt methyGff_7D107.meth.TSSprofile.txt -l promoter_7DWT promoter_7D107 --outFileName plot_promoter_profile_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k &
+>
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_promoter_3DWT.meth.TSSprofile.txt methyGff_3D107.meth.TSSprofile.txt -l promoter_3DWT promoter_3D107 --outFileName plot_promoter_profile_TSSTES_3D.pdf -s 1 1 1 -xl up2k TSS TES down2k &
+>
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_promoter_0DWT.meth.TSSprofile.txt methyGff_0D107.meth.TSSprofile.txt -l promoter_0DWT promoter_0D107 --outFileName plot_promoter_profile_TSSTES_0D.pdf -s 1 1 1 -xl up2k TSS TES down2k &
+>
+
+**2. Center**
+
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_promoter_7DWT.meth.TSSprofile.txt methyGff_7D107.meth.TSSprofile.txt -l promoter_7DWT promoter_7D107 --outFileName plot_promoter_profile_center_7D.pdf -s 1 1 -xl up2k center down2k &
+>
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_promoter_3DWT.meth.TSSprofile.txt methyGff_3D107.meth.TSSprofile.txt -l promoter_3DWT promoter_3D107 --outFileName plot_promoter_profile_center_3D.pdf -s 1 1 -xl up2k center down2k &
+>
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_promoter_0DWT.meth.TSSprofile.txt methyGff_0D107.meth.TSSprofile.txt -l promoter_0DWT promoter_0D107 --outFileName plot_promoter_profile_center_0D.pdf -s 1 1 -xl up2k center down2k &
+>
 
