@@ -263,27 +263,26 @@ awk '$NF<0' mutant.output.dmc | awk '{print $1"\t"$2"\t"$2}' > mutant.output.hyp
 
 ## 6. Calulate mC across predefined regions
 
+
+Example:
 ```
-example:
-	with gtf file:
+with gtf file:
     	methyGff -B -o gene.meth -G genome.fa -gtf gene.gtf -m output.methrario.txt
 
-  with multiple gtf file:
-    methyGff -B -o expressed.gene.meth unexpressed.gene.meth \
+with multiple gtf file:
+	methyGff -B -o expressed.gene.meth unexpressed.gene.meth \
         -G genome.fa  -gtf expressed.gene.gtf unexpressed.gene.gtf -m output.methrario.txt
 
-  with bed file:
-    methyGff -B -o gene.meth -G genome.fa -b gene.bed -m output.methrario.txt
+with bed file:
+	methyGff -B -o gene.meth -G genome.fa -b gene.bed -m output.methrario.txt
 
-  with multiple bed file:
-    methyGff -B -o expressed.gene.meth unexpressed.gene.meth \
+ with multiple bed file:
+	methyGff -B -o expressed.gene.meth unexpressed.gene.meth \
         -G genome.fa -b expressed.gene.bed unexpressed.gene.bed -m output.methrario.txt
 ```
 ```
 > methyGff [options] -o <OUT_PREFIX> -G GENOME -gff <GFF file>/-gtf <GTF file>/-b <bed file> -m <from Split methratio outfile> [-B][-P]
 ```
-
-
 
 ## 7. Plot diff meth with batmeth
 
@@ -326,6 +325,7 @@ methyGff -P -o methyGff_promoter_0DWT.meth -G ./batmeth2_index/TAIR10_chr_all.fa
 
 methyGff -P -o methyGff_promoter_0D107.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gff batmeth2_index/TAIR10_GFF3_genes_transposons.gff -m calmeth_0D107.methratio.txt &
 ```
+
 #### 7.2 Visualization
 
 #### 7.2.1 plot profile - methylation line chart
@@ -373,4 +373,65 @@ Remove the quotation mark at line 45 around the number 45.
 >
 > python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_promoter_0DWT.meth.TSSprofile.txt methyGff_0D107.meth.TSSprofile.txt -l promoter_0DWT promoter_0D107 --outFileName plot_promoter_profile_center_0D.pdf -s 1 1 -xl up2k center down2k &
 >
+
+
+
+# ADDING (1)
+## 7. Plot diff meth with batmeth
+### Using DEG gene list gtf file to see if DE genes have distinct methylation pattern from all gene:
+
+> DE gene list GTF path:
+>
+> /data/rep2_bismark_yao/Batmeth2/DEG
+>
+> 0D_log2genetable_GTF.tsv  3D_log2genetable_GTF.tsv  7D_log2genetable_GTF.tsv
+
+> log2genetable_GTF path:
+>
+> ~/annotate/0D_log2genetable_GTF.tsv  3D_log2genetable_GTF.tsv  7D_log2genetable_GTF.tsv
+
+> with gtf file:
+>
+> target path: /data/rep2_bismark_yao/Batmeth2
+```
+methyGff -B -o methyGff_7DWT_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_7DWT.methratio.txt &
+methyGff -B -o methyGff_7D107_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_7D107.methratio.txt &
+methyGff -B -o methyGff_3DWT_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_3DWT.methratio.txt &
+methyGff -B -o methyGff_3D107_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_3D107.methratio.txt &
+methyGff -B -o methyGff_0DWT_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_0DWT.methratio.txt &
+methyGff -B -o methyGff_0D107_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_0D107.methratio.txt &
+```
+#### 7.2.1 plot profile - methylation line chart
+**A. Gene Body (-B)**
+
+**1. TSS, TES**
+
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_7DWT_DEG.gene.meth.TSSprofile.txt methyGff_7D107_DEG.gene.meth.TSSprofile.txt -l DEgene_7DWT DEgene_7D107 --outFileName plot_profile_DEG_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k &
+>
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_3DWT_DEG.gene.meth.TSSprofile.txt methyGff_3D107_DEG.gene.meth.TSSprofile.txt -l DEgene_3DWT DEgene_3D107 --outFileName plot_profile_DEG_TSSTES_3D.pdf -s 1 1 1 -xl up2k TSS TES down2k &
+>
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_0DWT_DEG.gene.meth.TSSprofile.txt methyGff_0D107_DEG.gene.meth.TSSprofile.txt -l DEgene_0DWT DEgene_0D107 --outFileName plot_profile_DEG_TSSTES_0D.pdf -s 1 1 1 -xl up2k TSS TES down2k &
+>
+
+**2. Center**
+
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_7DWT_DEG.gene.meth.TSSprofile.txt methyGff_7D107_DEG.gene.meth.TSSprofile.txt -l DEgene_7DWT DEgene_7D107 --outFileName plot_profile_DEG_center_7D.pdf -s 1 1 -xl up2k center down2k &
+>
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_3DWT_DEG.gene.meth.TSSprofile.txt methyGff_3D107_DEG.gene.meth.TSSprofile.txt -l DEgene_3DWT DEgene_3D107 --outFileName plot_profile_DEG_center_3D.pdf -s 1 1 -xl up2k center down2k &
+>
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_0DWT_DEG.gene.meth.TSSprofile.txt methyGff_0D107_DEG.gene.meth.TSSprofile.txt -l DEgene_0DWT DEgene_0D107 --outFileName plot_profile_DEG_center_0D.pdf -s 1 1 -xl up2k center down2k &
+>
+
+**Let's compare DEG with all_gene in one plot together!**
+**A. Gene Body (-B)**
+
+**1. TSS, TES**
+
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_7DWT_DEG.gene.meth.TSSprofile.txt methyGff_7D107_DEG.gene.meth.TSSprofile.txt methyGff_7DWT.meth.TSSprofile.txt methyGff_7D107.meth.TSSprofile.txt -l DEgene_7DWT DEgene_7D107 gene_7DWT gene_7D107 --outFileName plot_profile_DEG_ALL_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k &
+>
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_3DWT_DEG.gene.meth.TSSprofile.txt methyGff_3D107_DEG.gene.meth.TSSprofile.txt methyGff_3DWT.meth.TSSprofile.txt methyGff_3D107.meth.TSSprofile.txt -l DEgene_3DWT DEgene_3D107 gene_3DWT gene_3D107 --outFileName plot_profile_DEG_ALL_TSSTES_3D.pdf -s 1 1 1 -xl up2k TSS TES down2k &
+>
+> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_0DWT_DEG.gene.meth.TSSprofile.txt methyGff_0D107_DEG.gene.meth.TSSprofile.txt methyGff_0DWT.meth.TSSprofile.txt methyGff_0D107.meth.TSSprofile.txt -l DEgene_0DWT DEgene_0D107 gene_0DWT gene_0D107 --outFileName plot_profile_DEG_ALL_TSSTES_0D.pdf -s 1 1 1 -xl up2k TSS TES down2k &
+> 
+
 
