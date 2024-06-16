@@ -374,7 +374,50 @@ Remove the quotation mark at line 45 around the number 45.
 > python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_promoter_0DWT.meth.TSSprofile.txt methyGff_0D107.meth.TSSprofile.txt -l promoter_0DWT promoter_0D107 --outFileName plot_promoter_profile_center_0D.pdf -s 1 1 -xl up2k center down2k &
 >
 
+#### 7.2.2 Plot methylation profile compared to random gene list 
 
+## (pending test)
+
+$ BatMeth2 methyGff -o active random \
+    -G genome.fa -m methratio.txt \
+    -b active.bed random.bed -B
+
+$ bt2profile.py -f active.centerprofile.txt \
+    random.centerprofile.txt \
+    -l active random \
+    --outFileName active_random.output.meth.pdf \
+    -s 1 1 -xl up2k center down2k
+
+#### 7.2.3 Plot methylation profile compared to average gene list 
+
+## (pending test)
+
+$ bt2profile.py -f H3K27me3.bdgene.AverMethylevel.txt \
+    H3K27me3.unbdgene.AverMethylevel.txt \
+    -l H3K27me3.bdgene H3K27me3.unbdgene \
+    --outFileName H3K27me3.output.meth.pdf \
+    -s 1 1 1 -xl up2k TSS TES down2k
+
+## 7.3 Plot bt2heatmap
+
+#### 7.3.1 whole gene + up/down stream
+
+$ python bt2heatmap.py -m H3K4me3.bdgene.GENE.cg.txt -l bg \
+-o test0.pdf -z k43 -sl TSS -el TTS
+
+#### 7.3.2 TSS & TES
+
+$ python bt2heatmap.py -m H3K4me3.bdgene.TSS.cg.txt H3K4me3.bdgene.TTS.cg.txt \
+    -l tss tts -o test.pdf --zMax 0.1 --colorMap vlag --centerlabel center -z bd
+
+#### 7.3.3 TSS & TES, with distinguishing mCG, CHG, CHH methylation
+
+$ python bt2heatmap.py -m H3K4me3.bdgene.TSS.cg.txt H3K4me3.bdgene.TTS.cg.txt \
+    H3K4me3.bdgene.TSS.chg.txt H3K4me3.bdgene.TTS.chg.txt \
+    H3K4me3.bdgene.TSS.chh.txt H3K4me3.bdgene.TTS.chh.txt \
+    -l H3K4me3.bdgene-tss H3K4me3.bdgene-tts \
+    -o H3K4me3.bdgene.TSS_TTS.heatmap.pdf --plotmatrix 3x2 \
+    --centerlabel center -z cg chg chh --zMax 0.3 1 0.01
 
 # ADDING (1)
 ## 7. Plot diff meth with batmeth
