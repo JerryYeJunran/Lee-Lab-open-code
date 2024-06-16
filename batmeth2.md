@@ -423,6 +423,7 @@ methyGff -B -o methyGff_0D107_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.f
 >
 
 **Let's compare DEG with all_gene in one plot together!**
+
 **A. Gene Body (-B)**
 
 **1. TSS, TES**
