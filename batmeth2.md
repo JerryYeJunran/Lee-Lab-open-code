@@ -374,13 +374,24 @@ Remove the quotation mark at line 45 around the number 45.
 > python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_promoter_0DWT.meth.TSSprofile.txt methyGff_0D107.meth.TSSprofile.txt -l promoter_0DWT promoter_0D107 --outFileName plot_promoter_profile_center_0D.pdf -s 1 1 -xl up2k center down2k &
 >
 
-#### 7.2.2 Plot methylation profile compared to random gene list 
+#### 7.2.2 Ploting methylation profile with DEG list
+
+methyGff -B -o methyGff_7DWT_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_7DWT.methratio.txt
+
+python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_3DWT_DEG.gene.meth.TSSprofile.txt methyGff_3D107_DEG.gene.meth.TSSprofile.txt -l DEgene_3DWT DEgene_3D107 --outFileName plot_profile_DEG_center_3D.pdf -s 1 1 -xl up2k center down2k &
+
+#### 7.2.3 Plot methylation profile compared to random gene list 
 
 ## (pending test)
+
+
+
 
 $ BatMeth2 methyGff -o active random \
     -G genome.fa -m methratio.txt \
     -b active.bed random.bed -B
+
+BatMeth2 methyGff -o active random -G ./batmeth2_index/TAIR10_chr_all.fas -m calmeth_7DWT.methratio.txt -b methyGff_7DWT_DEG.bed Pb_Random.bed -B
 
 $ bt2profile.py -f active.centerprofile.txt \
     random.centerprofile.txt \
