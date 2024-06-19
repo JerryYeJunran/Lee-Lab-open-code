@@ -384,14 +384,15 @@ python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_
 
 ## (pending test)
 
-
-
-
 $ BatMeth2 methyGff -o active random \
     -G genome.fa -m methratio.txt \
     -b active.bed random.bed -B
 
-BatMeth2 methyGff -o active random -G ./batmeth2_index/TAIR10_chr_all.fas -m calmeth_7DWT.methratio.txt -b methyGff_7DWT_DEG.bed Pb_Random.bed -B
+*where is the random bed file? How can I create such file?*
+BatMeth2 methyGff -o active random -G ./batmeth2_index/TAIR10_chr_all.fas -m calmeth_7DWT.methratio.txt -b methyGff_7DWT_DEG.bed Pb_Random.bed -B &
+
+Processing 1 out of 2. InFile: methyGff_7DWT_DEG.bed
+File methyGff_7DWT_DEG.bed Cannot be opened ....
 
 $ bt2profile.py -f active.centerprofile.txt \
     random.centerprofile.txt \
