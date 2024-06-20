@@ -382,40 +382,81 @@ python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_
 
 #### 7.2.3 Plot methylation profile compared to random gene list 
 
-## (pending test)
+> ## (pending test)
+> 
+> $ BatMeth2 methyGff -o active random \
+>     -G genome.fa -m methratio.txt \
+>     -b active.bed random.bed -B
+> 
+> *where is the random bed file? How can I create such file?*
+> BatMeth2 methyGff -o active random -G ./batmeth2_index/TAIR10_chr_all.fas -m calmeth_7DWT.methratio.txt -b methyGff_7DWT_DEG.bed Pb_Random.bed -B &
+> 
+> Processing 1 out of 2. InFile: methyGff_7DWT_DEG.bed
+> File methyGff_7DWT_DEG.bed Cannot be opened ....
+> 
+> $ bt2profile.py -f active.centerprofile.txt \
+>     random.centerprofile.txt \
+>     -l active random \
+>     --outFileName active_random.output.meth.pdf \
+>     -s 1 1 -xl up2k center down2k
 
-$ BatMeth2 methyGff -o active random \
-    -G genome.fa -m methratio.txt \
-    -b active.bed random.bed -B
-
-*where is the random bed file? How can I create such file?*
-BatMeth2 methyGff -o active random -G ./batmeth2_index/TAIR10_chr_all.fas -m calmeth_7DWT.methratio.txt -b methyGff_7DWT_DEG.bed Pb_Random.bed -B &
-
-Processing 1 out of 2. InFile: methyGff_7DWT_DEG.bed
-File methyGff_7DWT_DEG.bed Cannot be opened ....
-
-$ bt2profile.py -f active.centerprofile.txt \
-    random.centerprofile.txt \
-    -l active random \
-    --outFileName active_random.output.meth.pdf \
-    -s 1 1 -xl up2k center down2k
-
-#### 7.2.3 Plot methylation profile compared to average gene list 
-
-## (pending test)
-
-$ bt2profile.py -f H3K27me3.bdgene.AverMethylevel.txt \
-    H3K27me3.unbdgene.AverMethylevel.txt \
-    -l H3K27me3.bdgene H3K27me3.unbdgene \
-    --outFileName H3K27me3.output.meth.pdf \
-    -s 1 1 1 -xl up2k TSS TES down2k
+> #### 7.2.3 Plot methylation profile compared to average gene list 
+> 
+> ## (pending test)
+> 
+> $ bt2profile.py -f H3K27me3.bdgene.AverMethylevel.txt \
+>     H3K27me3.unbdgene.AverMethylevel.txt \
+>     -l H3K27me3.bdgene H3K27me3.unbdgene \
+>     --outFileName H3K27me3.output.meth.pdf \
+>     -s 1 1 1 -xl up2k TSS TES down2k
 
 ## 7.3 Plot bt2heatmap
 
+
+
 #### 7.3.1 whole gene + up/down stream
+
+Inout Files:
+methyGff_*D*.meth.body.cg.txt
+methyGff_*D*.meth.body.chg.txt
+methyGff_*D*.meth.body.chh.txt
+Refering to:
+bt2heatmap_methyGff_0D107_DEG.gene_body_CHH.pdf
+bt2heatmap_methyGff_0D107_body_CHH.pdf
+bt2heatmap_methyGff_0DWT_DEG.gene_body_CHH.pdf
+bt2heatmap_methyGff_0DWT_body_CHH.pdf
+bt2heatmap_methyGff_3D107_DEG.gene_body_CHH.pdf
+bt2heatmap_methyGff_3D107_body_CHH.pdf
+bt2heatmap_methyGff_3DWT_DEG.gene_body_CHH.pdf
+bt2heatmap_methyGff_3DWT_body_CHH.pdf
+bt2heatmap_methyGff_7D107_DEG.gene_body_CHH.pdf
+bt2heatmap_methyGff_7D107_body_CHH.pdf
+bt2heatmap_methyGff_7DWT_DEG.gene_body_CHH.pdf
+bt2heatmap_methyGff_7DWT_body_CHH.pdf
 
 $ python bt2heatmap.py -m H3K4me3.bdgene.GENE.cg.txt -l bg \
 -o test0.pdf -z k43 -sl TSS -el TTS
+
+> for file in methyGff_*D*.meth.body.chh.txt; do python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m $file -l ${file%.meth.body.chh.txt}_body_CHH -o bt2heatmap_${file%.meth.body.chh.txt}_body_CHH.pdf -z whole_genome -sl TSS -el TTS; echo bt2heatmap_${file%.meth.body.chh.txt}_body_CHH.pdf; done &
+
+python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_0DWT.meth.TSSprofile.txt -l 0DWT.meth_body_CHH -o bt2heatmap_methyGff_0DWT.meth.body.chh.pdf -z whole_genome -sl TSS -el TTS &
+
+> (test) for file in methyGff_*D*.meth.body.chh.txt; do echo bt2heatmap_${file%.meth.body.chh.txt}_body_CHH.pdf; done
+
+####
+# WORKING!!!!
+####
+7.3.0
+ref_gtf path = /home/vcm/annotate/Araport11.gtf
+methyGff --TSS --TTS --GENE -o test_methyGff_7DWT.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/araport_reference/Araport11.gtf -m calmeth_7DWT.methratio.txt &
+good!
+methyGff -B -o methyGff_7D107_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_7D107.methratio.txt &
+methyGff -B -o methyGff_3DWT_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_3DWT.methratio.txt &
+methyGff -B -o methyGff_3D107_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_3D107.methratio.txt &
+methyGff -B -o methyGff_0DWT_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_0DWT.methratio.txt &
+methyGff -B -o methyGff_0D107_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_0D107.methratio.txt &
+7.3.1
+python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m test_methyGff_7DWT.gene.meth.TSS.cg.txt test_methyGff_7DWT.gene.meth.GENE.cg.txt test_methyGff_7DWT.gene.meth.TTS.cg.txt -l TSS Geme TTS -o test_methyGff_7DWT.gene.meth.TSSGENETTS.cg.pdf --colorMap vlag --centerlabel center -z mCG
 
 #### 7.3.2 TSS & TES
 
