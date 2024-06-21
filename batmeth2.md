@@ -412,6 +412,79 @@ python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_
 
 ## 7.3 Plot bt2heatmap
 
+**options:**
+  -f MRFILE [MRFILE ...], --mrfile MRFILE [MRFILE ...]
+                        input methylevel files, wildtype.body.c*.txt
+  -m MATRIXFILE [MATRIXFILE ...], --matrixfile MATRIXFILE [MATRIXFILE ...]
+                        input methylevel matrix files, wildtype.GENE.cg.txt
+  -l SAMPLESLABEL [SAMPLESLABEL ...], --samplesLabel SAMPLESLABEL [SAMPLESLABEL ...]
+                        the label of the samples
+  -z GROUPLABELS [GROUPLABELS ...], --groupLabels GROUPLABELS [GROUPLABELS ...]
+                        Labels for the regions plotted in the heatmap. If more than one region is being plotted, a list of labels separated by spaces is required. If a label itself contains a
+                        space, then quotes are needed. For example, --groupLabels label_1, "label 2".
+  -sl STARTLABEL, --startlabel STARTLABEL
+                        the start label of the samples
+  -el ENDLABEL, --endlabel ENDLABEL
+                        the end label of the samples
+  -pl CENTERLABEL, --centerlabel CENTERLABEL
+                        the center label of the samples
+  --plotmatrix PLOTMATRIX
+                        1x1, default, row x col, order by columun, for exsample, 2x3 :file1 file2 file3file4 file5 file6
+  --outFileName FILENAME, -o FILENAME
+                        Output file name.
+  -c COLORMAP [COLORMAP ...], --colorMap COLORMAP [COLORMAP ...]
+                        Color map to use for the heatmap. If more than one heatmap is being plotted the color of each heatmap can be enter individually (e.g. `--colorMap Reds Blues`).The
+                        available options are: 'magma', 'inferno', 'plasma', 'viridis', 'cividis', 'twilight', 'twilight_shifted', 'turbo', 'Blues', 'BrBG', 'BuGn', 'BuPu', 'CMRmap', 'GnBu',
+                        'Greens', 'Greys', 'OrRd', 'Oranges', 'PRGn', 'PiYG', 'PuBu', 'PuBuGn', 'PuOr', 'PuRd', 'Purples', 'RdBu', 'RdGy', 'RdPu', 'RdYlBu', 'RdYlGn', 'Reds', 'Spectral',
+                        'Wistia', 'YlGn', 'YlGnBu', 'YlOrBr', 'YlOrRd', 'afmhot', 'autumn', 'binary', 'bone', 'brg', 'bwr', 'cool', 'coolwarm', 'copper', 'cubehelix', 'flag', 'gist_earth',
+                        'gist_gray', 'gist_heat', 'gist_ncar', 'gist_rainbow', 'gist_stern', 'gist_yarg', 'gnuplot', 'gnuplot2', 'gray', 'hot', 'hsv', 'jet', 'nipy_spectral', 'ocean', 'pink',
+                        'prism', 'rainbow', 'seismic', 'spring', 'summer', 'terrain', 'winter', 'Accent', 'Dark2', 'Paired', 'Pastel1', 'Pastel2', 'Set1', 'Set2', 'Set3', 'tab10', 'tab20',
+                        'tab20b', 'tab20c', 'grey', 'gist_grey', 'gist_yerg', 'Grays', 'rocket', 'mako', 'icefire', 'vlag', 'flare', 'crest'
+  --alpha ALPHA         The alpha channel (transparency) to use for the heatmaps. The default is 1.0 and values must be between 0 and 1.
+  --colorList COLORLIST [COLORLIST ...]
+                        List of colors to use to create a colormap. For example, if `--colorList black,yellow,blue` is set (colors separated by comas) then a color map that starts with black,
+                        continues to yellow and finishes in blue is created. If this option is selected, it overrides the --colorMap chosen. The list of valid color names can be seen here:
+                        http://matplotlib.org/examples/color/named_colors.html The number of transitions is defined by the --colorNumber option.
+  --colorNumber COLORNUMBER
+                        --colorList is required for an effect. This controls the number of transitions from one color to the other. If --colorNumber is the number of colors in --colorList
+                        then there will be no transitions between the colors.
+  --missingDataColor MISSINGDATACOLOR
+                        If --missingDataAsZero was not set, such cases will be colored in white by default.
+  --sortRegions {descend,ascend,no}
+                        Whether the heatmap should present the regions sorted. The default is to sort in descending order based on the mean value per region.
+  --sortUsing {mean,median,max,min,sum}
+                        Indicate which method should be used for sorting. For each row the method is computed.
+  --sortUsingSamples SORTUSINGSAMPLES [SORTUSINGSAMPLES ...]
+                        List of sample numbers (order as in matrix), which are used by --sortUsing for sorting. If no value is set, it uses all samples. Example: --sortUsingSamples 1 3
+  --linesAtTickMarks    Draw dashed lines from all tick marks through the heatmap. This is then similar to the dashed line draw at region bounds when using a reference point and --sortUsing
+                        region_length
+  --clusterUsingSamples CLUSTERUSINGSAMPLES [CLUSTERUSINGSAMPLES ...]
+                        List of sample numbers (order as in matrix), that are used for clustering by --kmeans or --hclust if not given, all samples are taken into account for clustering.
+                        Example: --ClusterUsingSamples 1 3
+  --kmeans KMEANS       Number of clusters to compute. When this option is set, the matrix is split into clusters using the k-means algorithm. Only works for data that is not grouped,
+                        otherwise only the first group will be clustered.
+  --hclust HCLUST       Number of clusters to compute. When this option is set, then the matrix is split into clusters using the hierarchical clustering algorithm, using "ward linkage". Only
+                        works for data that is not grouped, otherwise only the first group will be clustered. --hclust could be very slow if you have >1000 regions. In those cases, you might
+                        prefer --kmeans or if more clustering methods are required you can save the underlying matrix and run the clustering using other software. The plotting of the
+                        clustering may fail with an error if a cluster has very few members compared to the total number of regions.
+  -s SCALE [SCALE ...], --scale SCALE [SCALE ...]
+                        Maximum value for the Y-axis. Multiple values, separated by spaces can be set for each profile. If the number of yMin values is smaller thanthe number of plots, the
+                        values are recycled.
+  -t TITLE [TITLE ...], --title TITLE [TITLE ...]
+                        Title of the plot, to be printed on top of the generated image. Leave blank for no title.
+  --zMin ZMIN [ZMIN ...]
+                        Values to anchor the colormap
+  --zMax ZMAX [ZMAX ...]
+                        Values to anchor the colormap, Maximum value for the heatmap.
+  -ft IMAGE_FORMAT, --image_format IMAGE_FORMAT
+                        The file format, e.g. 'png', 'pdf', 'svg', ... The behavior when this is unset is documented under fname.
+  --perGroup            The default is to plot all groups of regions by sample. Using this option instead plots all samples by group of regions. Note that this is only useful if you have
+                        multiple groups of regions. by sample rather than group.
+  --dpi DPI             Set the DPI to save the figure. default: 100
+  --figsize FIGSIZE     Set the figure size to save the figure. [with]x[height], default: 1.5x11
+  --boxAroundHeatmaps BOXAROUNDHEATMAPS
+                        By default black boxes are plot around heatmaps. This can be turned off by setting --boxAroundHeatmaps no
+  --help, -h            show this help message and exit
 
 
 #### 7.3.1 whole gene + up/down stream
@@ -434,29 +507,69 @@ bt2heatmap_methyGff_7D107_body_CHH.pdf
 bt2heatmap_methyGff_7DWT_DEG.gene_body_CHH.pdf
 bt2heatmap_methyGff_7DWT_body_CHH.pdf
 
-$ python bt2heatmap.py -m H3K4me3.bdgene.GENE.cg.txt -l bg \
--o test0.pdf -z k43 -sl TSS -el TTS
-
-> for file in methyGff_*D*.meth.body.chh.txt; do python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m $file -l ${file%.meth.body.chh.txt}_body_CHH -o bt2heatmap_${file%.meth.body.chh.txt}_body_CHH.pdf -z whole_genome -sl TSS -el TTS; echo bt2heatmap_${file%.meth.body.chh.txt}_body_CHH.pdf; done &
-
-python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_0DWT.meth.TSSprofile.txt -l 0DWT.meth_body_CHH -o bt2heatmap_methyGff_0DWT.meth.body.chh.pdf -z whole_genome -sl TSS -el TTS &
-
-> (test) for file in methyGff_*D*.meth.body.chh.txt; do echo bt2heatmap_${file%.meth.body.chh.txt}_body_CHH.pdf; done
-
 ####
 # WORKING!!!!
 ####
-7.3.0
+
+#### 7.3.0
+
 ref_gtf path = /home/vcm/annotate/Araport11.gtf
-methyGff --TSS --TTS --GENE -o test_methyGff_7DWT.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/araport_reference/Araport11.gtf -m calmeth_7DWT.methratio.txt &
-good!
-methyGff -B -o methyGff_7D107_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_7D107.methratio.txt &
-methyGff -B -o methyGff_3DWT_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_3DWT.methratio.txt &
-methyGff -B -o methyGff_3D107_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_3D107.methratio.txt &
-methyGff -B -o methyGff_0DWT_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_0DWT.methratio.txt &
-methyGff -B -o methyGff_0D107_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_0D107.methratio.txt &
-7.3.1
-python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m test_methyGff_7DWT.gene.meth.TSS.cg.txt test_methyGff_7DWT.gene.meth.GENE.cg.txt test_methyGff_7DWT.gene.meth.TTS.cg.txt -l TSS Geme TTS -o test_methyGff_7DWT.gene.meth.TSSGENETTS.cg.pdf --colorMap vlag --centerlabel center -z mCG
+`for-heatmap: used to run bt2heatmap`
+`genome wide: using the whole genome gtf ref_genome`
+`gene: gene region, other than promoter region`
+
+methyGff --TSS --TTS --GENE -o methyGff_for-heatmap_0DWT.genomewide.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/araport_reference/Araport11.gtf -m calmeth_0DWT.methratio.txt &
+methyGff --TSS --TTS --GENE -o methyGff_for-heatmap_3DWT.genomewide.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/araport_reference/Araport11.gtf -m calmeth_3DWT.methratio.txt &
+methyGff --TSS --TTS --GENE -o methyGff_for-heatmap_7DWT.genomewide.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/araport_reference/Araport11.gtf -m calmeth_7DWT.methratio.txt &
+methyGff --TSS --TTS --GENE -o methyGff_for-heatmap_0D107.genomewide.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/araport_reference/Araport11.gtf -m calmeth_0D107.methratio.txt &
+methyGff --TSS --TTS --GENE -o methyGff_for-heatmap_3D107.genomewide.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/araport_reference/Araport11.gtf -m calmeth_3D107.methratio.txt &
+methyGff --TSS --TTS --GENE -o methyGff_for-heatmap_7D107.genomewide.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/araport_reference/Araport11.gtf -m calmeth_7D107.methratio.txt &
+
+
+#### 7.3.1 bt2heatmap
+`-TSS + -TTS` `mCG`
+
+python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m \
+methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.cg.txt \
+methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.cg.txt \
+methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chg.txt \
+methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chg.txt \
+methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chh.txt \
+methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chh.txt \
+-l mCG_TSS mCG_TTS CHG_TSS CHG_TTS CHH_TSS CHH_TTS \
+-o test_methyGff_0D107.genomewide.gene.meth.TSSTTS.cgchgchh.pdf \
+--plotmatrix 3x2 --colorMap vlag --centerlabel center \
+-t whole_genome_7DWT \
+-z mCG CHG CHH &
+
+python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m \
+methyGff_for-heatmap_7D107.genomewide.gene.meth.TSS.cg.txt \
+methyGff_for-heatmap_7D107.genomewide.gene.meth.TTS.cg.txt \
+methyGff_for-heatmap_7D107.genomewide.gene.meth.TSS.chg.txt \
+methyGff_for-heatmap_7D107.genomewide.gene.meth.TTS.chg.txt \
+methyGff_for-heatmap_7D107.genomewide.gene.meth.TSS.chh.txt \
+methyGff_for-heatmap_7D107.genomewide.gene.meth.TTS.chh.txt \
+-l mCG_TSS mCG_TTS CHG_TSS CHG_TTS CHH_TSS CHH_TTS \
+-o test_methyGff_7DWT.genomewide.gene.meth.TSSTTS.cgchgchh.pdf \
+--plotmatrix 3x2 --colorMap vlag --centerlabel center \
+-t whole_genome_7DWT \
+-z mCG CHG CHH &
+
+python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m \
+methyGff_for-heatmap_7D107.genomewide.gene.meth.TSS.cg.txt \
+methyGff_for-heatmap_7D107.genomewide.gene.meth.TTS.cg.txt \
+methyGff_for-heatmap_7D107.genomewide.gene.meth.TSS.chg.txt \
+methyGff_for-heatmap_7D107.genomewide.gene.meth.TTS.chg.txt \
+methyGff_for-heatmap_7D107.genomewide.gene.meth.TSS.chh.txt \
+methyGff_for-heatmap_7D107.genomewide.gene.meth.TTS.chh.txt \
+-l mCG_TSS mCG_TTS CHG_TSS CHG_TTS CHH_TSS CHH_TTS \
+-o test_methyGff_7DWT.genomewide.gene.meth.TSSTTS.cgchgchh.pdf \
+--plotmatrix 3x2 --colorMap vlag --centerlabel center \
+-t whole_genome_7DWT \
+-z mCG CHG CHH &
+
+`-GENE` `mCG`
+python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m test_methyGff_7DWT.gene.meth.GENE.cg.txt -l Geme -o test_methyGff_7DWT.gene.meth.GENE.cg.pdf --colorMap vlag --centerlabel center -z mCG
 
 #### 7.3.2 TSS & TES
 
