@@ -531,18 +531,14 @@ methyGff --TSS --TTS --GENE -o methyGff_for-heatmap_7D107.genomewide.gene.meth -
 python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m test_methyGff_7DWT.gene.meth.TSS.cg.txt test_methyGff_7DWT.gene.meth.TTS.cg.txt -l TSS TTS -o test_methyGff_7DWT.gene.meth.TSSTTS.cg.pdf --colorMap vlag --centerlabel center -z mCG
 
 `-TSS + -TTS` `mCG`
+python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.cg.txt -l TSS TTS -o methyGff_0D107.genomewide.gene.meth.TSSTTS.cg.pdf --colorMap vlag --centerlabel center -z mCG &
+
+python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chg.txt -l TSS TTS -o methyGff_0D107.genomewide.gene.meth.TSSTTS.chh.pdf --colorMap vlag --centerlabel center -z CHG &
+
+python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chh.txt -l TSS TTS -o methyGff_0D107.genomewide.gene.meth.TSSTTS.chh.pdf --colorMap vlag --centerlabel center -z CHH &
+
 ?????
-python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m \
-methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.cg.txt \
-methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.cg.txt \
-methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chg.txt \
-methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chg.txt \
-methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chh.txt \
-methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chh.txt \
--o test_methyGff_0D107.genomewide.gene.meth.TSSTTS.cgchgchh.pdf \
---plotmatrix 2x3 --colorMap vlag --centerlabel center \
--t whole_genome_0D107 \
--z mCG CHG CHH &
+python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chh.txt -l TSS TTS TSS TTS TSS TTS -o methyGff_0D107.genomewide.gene.meth.TSSTTS.cgchgchh.pdf --colorMap vlag --centerlabel center &
 
 python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m \
 methyGff_for-heatmap_3D107.genomewide.gene.meth.TSS.cg.txt \
