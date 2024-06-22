@@ -46,6 +46,18 @@ sudo make install
 sudo ldconfig
 ```
 
+#### 0.5 gsl-2.4
+download_path = /home/vcm/Batmeth2_download/gsl/gsl-2.4
+
+```
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:/home/vcm/Batmeth2_download/BatMeth2/gsl-2.4/include
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/home/vcm/Batmeth2_download/BatMeth2/gsl-2.4/include
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH::/home/vcm/Batmeth2_download/BatMeth2/gsl-2.4/lib
+export LIBRARY_PATH=$LIBRARY_PATH::/home/vcm/Batmeth2_download/BatMeth2/gsl-2.4/lib
+
+source ~/.bashrc
+```
+
 ## 1. build index referemce genome
 ### 1.1 create path: ./batmeth_index and download ref_genome.fa
 
@@ -55,6 +67,7 @@ cd ./batmeth
 
 wget <"link to TAIR10 fasta file">
 ```
+
 
 ### 1.2 index reference genome
 
@@ -533,10 +546,20 @@ python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m test_meth
 `-TSS + -TTS` `mCG`
 python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.cg.txt -l TSS TTS -o methyGff_0D107.genomewide.gene.meth.TSSTTS.cg.pdf --colorMap vlag --centerlabel center -z mCG &
 
-python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chg.txt -l TSS TTS -o methyGff_0D107.genomewide.gene.meth.TSSTTS.chh.pdf --colorMap vlag --centerlabel center -z CHG &
+python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chg.txt -l TSS TTS -o methyGff_0D107.genomewide.gene.meth.TSSTTS.chg.pdf --colorMap vlag --centerlabel center -z CHG &
 
 python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chh.txt -l TSS TTS -o methyGff_0D107.genomewide.gene.meth.TSSTTS.chh.pdf --colorMap vlag --centerlabel center -z CHH &
 
+python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_3D107.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_3D107.genomewide.gene.meth.TTS.cg.txt -l TSS TTS -o methyGff_3D107.genomewide.gene.meth.TSSTTS.cg.pdf --colorMap vlag --centerlabel center -z mCG -l TSS TTS -t 3D107 --zMax 0.4 &
+
+python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_3D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_3D107.genomewide.gene.meth.TTS.chg.txt -l TSS TTS -o methyGff_3D107.genomewide.gene.meth.TSSTTS.chg.pdf --colorMap vlag --centerlabel center -z CHG -l TSS TTS -t 3D107 --zMax 0.3 &
+
+python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_3D107.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_3D107.genomewide.gene.meth.TTS.chh.txt -l TSS TTS -o methyGff_3D107.genomewide.gene.meth.TSSTTS.chh.pdf --colorMap vlag --centerlabel center -z CHH -l TSS TTS -t 3D107 --zMax 0.1 &
+
+?????
+
+#### ????? Need to work in real server for more memory usage!
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chh.txt -o bt2heatmap_0D107.genomewide.gene.meth.0D107.TSSTTS.cgchgchh.pdf --plotmatrix 3x2 --colorMap vlag --centerlabel center -z cg chg chh --zMax 0.3 0.5 0.01 &
 ?????
 python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chh.txt -l TSS TTS TSS TTS TSS TTS -o methyGff_0D107.genomewide.gene.meth.TSSTTS.cgchgchh.pdf --colorMap vlag --centerlabel center &
 
