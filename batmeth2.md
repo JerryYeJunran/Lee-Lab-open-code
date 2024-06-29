@@ -350,13 +350,35 @@ Remove the quotation mark at line 45 around the number 45.
 **A. Gene Body (-B)**
 
 **1. TSS, TES**
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f methyGff_7DWT.meth.TSSprofile.txt methyGff_7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName plot_profile_mCG_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CG &
+```
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f methyGff_7DWT.meth.TSSprofile.txt methyGff_7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName plot_profile_CHG_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CHG &
+```
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f methyGff_7DWT.meth.TSSprofile.txt methyGff_7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName plot_profile_CHH_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CHH &
+```
 
-> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_7DWT.meth.TSSprofile.txt methyGff_7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName plot_profile_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k &
->
-> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_3DWT.meth.TSSprofile.txt methyGff_3D107.meth.TSSprofile.txt -l gene_3DWT gene_3D107 --outFileName plot_profile_TSSTES_3D.pdf -s 1 1 1 -xl up2k TSS TES down2k &
->
-> python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_0DWT.meth.TSSprofile.txt methyGff_0D107.meth.TSSprofile.txt -l gene_0DWT gene_0D107 --outFileName plot_profile_TSSTES_0D.pdf -s 1 1 1 -xl up2k TSS TES down2k &
->
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f methyGff_3DWT.meth.TSSprofile.txt methyGff_3D107.meth.TSSprofile.txt -l gene_3DWT gene_3D107 --outFileName plot_profile_mCG_TSSTES_3D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CG &
+```
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f methyGff_3DWT.meth.TSSprofile.txt methyGff_3D107.meth.TSSprofile.txt -l gene_3DWT gene_3D107 --outFileName plot_profile_CHG_TSSTES_3D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CHG &
+```
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f methyGff_3DWT.meth.TSSprofile.txt methyGff_3D107.meth.TSSprofile.txt -l gene_3DWT gene_3D107 --outFileName plot_profile_CHH_TSSTES_3D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CHH &
+```
+
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f methyGff_0DWT.meth.TSSprofile.txt methyGff_0D107.meth.TSSprofile.txt -l gene_0DWT gene_0D107 --outFileName plot_profile_mCG_TSSTES_0D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CG &
+```
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f methyGff_0DWT.meth.TSSprofile.txt methyGff_0D107.meth.TSSprofile.txt -l gene_0DWT gene_0D107 --outFileName plot_profile_CHG_TSSTES_0D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CHG &
+```
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f methyGff_0DWT.meth.TSSprofile.txt methyGff_0D107.meth.TSSprofile.txt -l gene_0DWT gene_0D107 --outFileName plot_profile_CHH_TSSTES_0D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CHH &
+```
 
 **2. Center**
 
@@ -388,11 +410,62 @@ Remove the quotation mark at line 45 around the number 45.
 >
 
 #### 7.2.2 Ploting methylation profile with DEG list
+usage: bt2profile.py [-f MRFILE [MRFILE ...]] [-l LABEL [LABEL ...]] --outFileName FILENAME [--sample SAMPLE [SAMPLE ...]] [-s SCALE [SCALE ...]] [-xl XLABEL [XLABEL ...]] [-yl YLABEL]
+                     [-t TITLE [TITLE ...]] [--yMin YMIN [YMIN ...]] [--yMax YMAX [YMAX ...]] [--color COLOR [COLOR ...]] [--legend {0,1,2,3,4,5,6,7,8,9,10,11,12}] [--lastlegend LASTLEGEND]
+                     [--legendsize LEGENDSIZE] [--context CONTEXT] [--pergroup PERGROUP] [-ft IMAGE_FORMAT] [--dpi DPI] [--help]
 
+options:
+  -f MRFILE [MRFILE ...], --mrfile MRFILE [MRFILE ...]
+                        DNA AverMethylevel files, seperate by space. eg. wildtype.AverMethy.txt
+  -l LABEL [LABEL ...], --label LABEL [LABEL ...]
+                        Labels of samples, sperate by space. eg. -l widetype
+  --outFileName FILENAME, -o FILENAME
+                        Output file name.
+  --sample SAMPLE [SAMPLE ...]
+                        The interval of N data is a group, and the average value is taken as the representative. Please note that the number of labels should correspondto the number of
+                        samples after averaging.
+  -s SCALE [SCALE ...], --scale SCALE [SCALE ...]
+                        Visual X-axis spacing, default upsteam:body:downstream is 1:1:1 (-s 1 1 1), which should be consistent with -b and -bl parameters in BatMeth2:methyGff,and separated
+                        by spaces
+  -xl XLABEL [XLABEL ...], --xlabel XLABEL [XLABEL ...]
+                        Consistent with the -s parameter, if the -s parameter is 1 1 1, i.e. 1:1:1,then the corresponding X-axis label is UP TSS TES Down
+  -yl YLABEL, --ylabel YLABEL
+                        y-axis label
+  -t TITLE [TITLE ...], --title TITLE [TITLE ...]
+                        Title of the plot, to be printed on top of the generated image. Leave blank for no title.
+  --yMin YMIN [YMIN ...]
+                        Minimum value for the Y-axis. Multiple values, separated by spaces can be set for each profile. If the number of yMin values is smaller thanthe number of plots, the
+                        values are recycled.
+  --yMax YMAX [YMAX ...]
+                        Maximum value for the Y-axis. Multiple values, separated by spaces can be set for each profile. If the number of yMin values is smaller thanthe number of plots, the
+                        values are recycled.
+  --color COLOR [COLOR ...]
+                        List of colors to use, should same as the number of samples,Color names and html hex strings (e.g., #eeff22) are accepted. The color names should be space separated.
+                        For example, --color red blue green
+  --legend {0,1,2,3,4,5,6,7,8,9,10,11,12}
+                        The location of the legend. best : 0, upper right : 1, upper left : 2, lower left : 3, lower right : 4, right : 5, center left : 6, center right: 7, lower center: 8,
+                        upper center: 9, center : 10, out : 11, none : 12
+  --lastlegend LASTLEGEND
+                        Only show the last figure's legend.
+  --legendsize LEGENDSIZE
+                        the text size of the legend.
+  --context CONTEXT     
+  			choices=["ALL", "C", "CG", "CHG","CHH"],
+  --color COLOR
+  			List of colors to use, should same as the number of samples,Color names and html hex strings (e.g., #eeff22) are accepted. The color names should be space separated.
+                        For example, --color red blue green
+  --pergroup PERGROUP   plot cg/ch of the same sample in one fig,only useful when have more than 1 sample input file
+  -ft IMAGE_FORMAT, --image_format IMAGE_FORMAT
+                        The file format, e.g. 'png', 'pdf', 'svg', ... The behavior when this is unset is documented under fname.
+  --dpi DPI             Set the DPI to save the figure. default: 200
+
+```
 methyGff -B -o methyGff_7DWT_DEG.gene.meth -G ./batmeth2_index/TAIR10_chr_all.fas -gtf /home/vcm/annotate/7D_log2genetable_GTF.tsv -m calmeth_7DWT.methratio.txt
+```
 
+```
 python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2profile.py -f methyGff_3DWT_DEG.gene.meth.TSSprofile.txt methyGff_3D107_DEG.gene.meth.TSSprofile.txt -l DEgene_3DWT DEgene_3D107 --outFileName plot_profile_DEG_center_3D.pdf -s 1 1 -xl up2k center down2k &
-
+```
 #### 7.2.3 Plot methylation profile compared to random gene list 
 
 > ## (pending test)
@@ -559,17 +632,18 @@ python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_
 ?????
 
 #### ????? Need to work in real server for more memory usage!
- python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chh.txt -o bt2heatmap_genomewide.gene.meth.0D107.TSSTTS.cgchgchh.pdf --plotmatrix 3x2 --colorMap vlag --centerlabel center -z cg chg chh --zMax 0.3 0.1 0.03 &
+ python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chh.txt -o bt2heatmap_0D107.genomewide.gene.meth.TSSTTS.cgchgchh.pdf --plotmatrix 3x2 --colorMap vlag --centerlabel center -z mCG CHG CHH --zMax 0.3 0.05 0.03 -t "0D107 TSS TTS" &
 
-  python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_3D107.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_3D107.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_3D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_3D107.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_3D107.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_3D107.genomewide.gene.meth.TTS.chh.txt -o bt2heatmap_3D107.genomewide.gene.meth.TSSTTS.cgchgchh.pdf --plotmatrix 3x2 --colorMap vlag --centerlabel center -z cg chg chh --zMax 0.3 0.1 0.03 &
+  python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_3D107.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_3D107.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_3D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_3D107.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_3D107.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_3D107.genomewide.gene.meth.TTS.chh.txt -o bt2heatmap_3D107.genomewide.gene.meth.TSSTTS.cgchgchh.pdf --plotmatrix 3x2 --colorMap vlag --centerlabel center -z mCG CHG CHH --zMax 0.3 0.05 0.03 -t "0D107 TSS TTS" &
 
-  python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_7D107.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_7D107.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_7D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_7D107.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_7D107.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_7D107.genomewide.gene.meth.TTS.chh.txt -o bt2heatmap_7D107.genomewide.gene.meth.TSSTTS.cgchgchh.pdf --plotmatrix 3x2 --colorMap vlag --centerlabel center -z cg chg chh --zMax 0.3 0.1 0.03 &
+  python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_7D107.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_7D107.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_7D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_7D107.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_7D107.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_7D107.genomewide.gene.meth.TTS.chh.txt -o bt2heatmap_7D107.genomewide.gene.meth.TSSTTS.cgchgchh.pdf --plotmatrix 3x2 --colorMap vlag --centerlabel center -z mCG CHG CHH --zMax 0.3 0.05 0.03 -t "0D107 TSS TTS" &
 
- python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0DWT.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_0DWT.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_0DWT.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_0DWT.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_0DWT.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_0DWT.genomewide.gene.meth.TTS.chh.txt -o bt2heatmap_genomewide.gene.meth.0DWT.TSSTTS.cgchgchh.pdf --plotmatrix 3x2 --colorMap vlag --centerlabel center -z cg chg chh --zMax 0.3 0.1 0.03 &
+ python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0DWT.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_0DWT.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_0DWT.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_0DWT.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_0DWT.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_0DWT.genomewide.gene.meth.TTS.chh.txt -o bt2heatmap_0DWT.genomewide.gene.meth.TSSTTS.cgchgchh.pdf --plotmatrix 3x2 --colorMap vlag --centerlabel center -z mCG CHG CHH --zMax 0.3 0.05 0.03 -t "0D107 TSS TTS" &
 
-  python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_3DWT.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_3DWT.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_3DWT.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_3DWT.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_3DWT.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_3DWT.genomewide.gene.meth.TTS.chh.txt -o bt2heatmap_3DWT.genomewide.gene.meth.TSSTTS.cgchgchh.pdf --plotmatrix 3x2 --colorMap vlag --centerlabel center -z cg chg chh --zMax 0.3 0.1 0.03 &
+  python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_3DWT.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_3DWT.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_3DWT.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_3DWT.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_3DWT.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_3DWT.genomewide.gene.meth.TTS.chh.txt -o bt2heatmap_3DWT.genomewide.gene.meth.TSSTTS.cgchgchh.pdf --plotmatrix 3x2 --colorMap vlag --centerlabel center -z mCG CHG CHH --zMax 0.3 0.05 0.03 -t "0D107 TSS TTS" &
 
-  python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_7DWT.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_7DWT.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_7DWT.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_7DWT.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_7DWT.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_7DWT.genomewide.gene.meth.TTS.chh.txt -o bt2heatmap_7DWT.genomewide.gene.meth.TSSTTS.cgchgchh.pdf --plotmatrix 3x2 --colorMap vlag --centerlabel center -z cg chg chh --zMax 0.3 0.1 0.03 &
+  python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_7DWT.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_7DWT.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_7DWT.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_7DWT.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_7DWT.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_7DWT.genomewide.gene.meth.TTS.chh.txt -o bt2heatmap_7DWT.genomewide.gene.meth.TSSTTS.cgchgchh.pdf --plotmatrix 3x2 --colorMap vlag --centerlabel center -z cg chg chh -z mCG CHG CHH --zMax 0.3 0.05 0.03 -t "0D107 TSS TTS" &
+
 ?????
 python /home/vcm/miniconda3/envs/batmeth/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chh.txt -l TSS TTS TSS TTS TSS TTS -o methyGff_0D107.genomewide.gene.meth.TSSTTS.cgchgchh.pdf --colorMap vlag --centerlabel center &
 
