@@ -1,6 +1,6 @@
 # Step1: construct GTF files with only 1 type of genetic component
 
-"path:"
+> path:
 
 ```
 (base) vcm@test:~/araport_reference$ pwd
