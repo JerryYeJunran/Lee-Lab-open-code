@@ -16,7 +16,7 @@
 └── [1.0M]  protein_coding.Araport11.position
 ```
 
-"input file - Araport11.gtf"
+> input file - Araport11.gtf
 ```
 Chr1    Araport11       transposable_element_gene       433031  433819  .       -       .       transcript_id "AT1G02228"; gene_id "AT1G02228";
 Chr1    Araport11       transposable_element_gene       846664  847739  .       +       .       transcript_id "AT1G03420"; gene_id "AT1G03420";
@@ -26,7 +26,7 @@ Chr1    Araport11       transposable_element_gene       2790290 2793641 .       
 ...
 ```
 
-"output file - protein_coding.Araport11.position"
+> output file - protein_coding.Araport11.position
 ```
 Chr1    3631    5899    AT1G01010
 Chr1    6788    9130    AT1G01020
@@ -38,7 +38,7 @@ Chr1    33365   37871   AT1G01060
 ...
 ```
 
-"output file - exon.Araport11.position"
+> output file - exon.Araport11.position
 ```
 Chr1    3631    3913    AT1G01010       exon
 Chr1    3996    4276    AT1G01010       exon
@@ -48,7 +48,7 @@ Chr1    5174    5326    AT1G01010       exon
 ...
 ```
 
-"output file - five_prime_UTR.Araport11.position"
+> output file - five_prime_UTR.Araport11.position
 ```
 Chr1    3631    3759    AT1G01010       five_prime_UTR
 Chr1    8667    9130    AT1G01020       five_prime_UTR
@@ -59,7 +59,7 @@ Chr1    8443    8464    AT1G01020       five_prime_UTR
 ...
 ```
 
-"output file - three_prime_UTR.Araport11.position"
+> output file - three_prime_UTR.Araport11.position
 ```
 Chr1    5631    5899    AT1G01010       three_prime_UTR
 Chr1    6788    6914    AT1G01020       three_prime_UTR
@@ -69,7 +69,7 @@ Chr1    6788    6914    AT1G01020       three_prime_UTR
 ...
 ```
 
-"Code"
+> Code
 ```
 (protein_coding)
 zcat Araport11.gtf.gz |perl -alne '{next unless $F[2] eq "gene" ;/gene_id \"(.*?)\";/; print "$F[0]\t$F[3]\t$F[4]\t$1" }' > protein_coding.Araport11.position
