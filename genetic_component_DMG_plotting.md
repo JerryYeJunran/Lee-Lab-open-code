@@ -20,13 +20,18 @@ miRNA
 ├── [2.9M]  Araport11_gene.gtf
 ├── [ 84M]  Araport11.gtf
 ├── [6.3M]  Araport11.gtf.gz
+├── [139M]  Araport11_seq_20220914.fa
+├── [ 28M]  Araport11_seq_20220914.fa.gz
 ├── [3.7M]  Araport11_transposon.gtf
 ├── [6.3M]  araport_reference
 ├── [ 11M]  exon.Araport11.position
+├── [2.5M]  five_prime_UTR.Araport11.position
 ├── [1.2M]  gene.Araport11.position
 ├── [   0]  intron.Araport11.position
-└── [1.0M]  protein_coding.Araport11.position
+├── [1.0M]  protein_coding.Araport11.position
+└── [2.2M]  three_prime_UTR.Araport11.position
 ```
+
 
 > input file - Araport11.gtf
 ```
@@ -163,13 +168,65 @@ bedtools intersect -a 3days107_unannotated.bed -b /home/vcm/araport_reference/ex
 
 > Code
 ```
-for file in *_unannotated.bed; do bedtools intersect -a $file -b /home/vcm/araport_reference/exon.Araport11.position -wa -wb | bedtools groupby -i - -g 1,2,3,4,8 -c 9 -o collapse > ${file%_unannotated.bed}_annotated.bed; echo ${file%_unannotated.bed}_annotated.bed; done &
+for file in *_unannotated.bed; do bedtools intersect -a $file -b /home/vcm/araport_reference/exon.Araport11.position -wa -wb | bedtools groupby -i - -g 1,2,3,4,8 -c 9 -o collapse > ${file%_unannotated.bed}_exon_annotated.bed; echo ${file%_unannotated.bed}_exon_annotated.bed; done &
 ```
 
 # Step 3: run batmeth2 plotting
 
-### 3.1 prepare batmeth2 input file
-?
+### 3.1 index reference genome
+`batMeth2 index -g genome_name.fa`
+#### Araport11 sequence:
+```
+batmeth2 index -g Araport11.fas
+```
+> genome path: /home/vcm/araport_reference/araport11_ref/Araport11.fas
+> However, Araport11 sequence file does not work. It returns with error:
+```
+[MM] /home/vcm/Batmeth2_download/BatMeth2/bin/batmeth2zation of DNA methylation data
+        calculate differential DNA methylation cytosine or regiocross gene/TE/peak/bwame index Araport11.fas.batmeth2.fa
+sh: 1: /home/vcm/Batmeth2_download/BatMeth2/bin/batmeth2zation: not found
+sh: 2: calculate: not found
+```
+#### TAIR10 sequence
+```
+wget https://www.arabidopsis.org/api/download-files/download?filePath=Genes/TAIR10_genome_release/TAIR10_chromosome_files/TAIR10_chr_all.fas.gz
+mv download\?filePath\=Genes%2FTAIR10_genome_release%2FTAIR10_chromosome_files%2FTAIR10_chr_all.fas.gz TAIR10_chr_all.fas.gz
+gunzip --keep TAIR10_chr_all.fas.gz
+
+batmeth2 index TAIR10_chr_all.fas
+```
+> We can add prefix to the genome by parameter (--gp genome_path_prefix), e.g., TAIR10
+```
+[MM] /home/vcm/Batmeth2_download/BatMeth2/bin/genome2cg -g TAIR10_chr_all.fas
+Converting C->T
+Converting G->A
+[MM] /home/vcm/Batmeth2_download/BatMeth2/bin/genomebinLen TAIR10_chr_all.fas
+[MM] /home/vcm/Batmeth2_download/BatMeth2/bin/bwame index TAIR10_chr_all.fas.batmeth2.fa
+[MM index] Pack FASTA... %.0/2f sec
+[MM index] Construct BWT for the packed sequence...
+[BWTIncCreate] textLength=478674536, availableWord=45680880
+[BWTIncConstructFromPacked] 10 iterations done. 74387544 characters processed.
+[BWTIncConstructFromPacked] 20 iterations done. 138353096 characters processed.
+[BWTIncConstructFromPacked] 30 iterations done. 195201800 characters processed.
+[BWTIncConstructFromPacked] 40 iterations done. 245725048 characters processed.
+[BWTIncConstructFromPacked] 50 iterations done. 290626248 characters processed.
+[BWTIncConstructFromPacked] 60 iterations done. 330530504 characters processed.
+[BWTIncConstructFromPacked] 70 iterations done. 365993464 characters processed.
+[BWTIncConstructFromPacked] 80 iterations done. 397509016 characters processed.
+[BWTIncConstructFromPacked] 90 iterations done. 425516104 characters processed.
+[BWTIncConstructFromPacked] 100 iterations done. 450404856 characters processed.
+[BWTIncConstructFromPacked] 110 iterations done. 472522008 characters processed.
+[bwt_gen] Finished constructing BWT in 114 iterations.
+[MM index] 81.19 seconds elapse.
+[MM index] Update BWT... 0.76 sec
+[MM index] Pack forward-only FASTA... 0.58 sec
+[MM index] Construct SA from BWT and Occ... 42.46 sec
+[main] Version: 0.7.17-r1198-dirty
+[main] CMD: /home/vcm/Batmeth2_download/BatMeth2/bin/bwame index TAIR10_chr_all.fas.batmeth2.fa
+[main] Real time: 126.007 sec; CPU: 125.982 sec
+```
+> Genome path: /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas
+
 
 ### 3.2 Calulate mC across predefined regions
 > Format:
@@ -198,7 +255,24 @@ Chr1    17      +       CHH     0       25      0.000000        25.0    61      
 ```
 
 > Trial on 1 file
+
 ```
-methyGff -B -o test7D107.meth -G 7days107-LFK10435_L1_1.fq.clean.gz 7days107-LFK10435_L1_2.fq.clean.gz -b 7days107_unannotated.bed -m calmeth_7D107.methratio.txt
+methyGff -B -o testexon7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+
+methyGff -P -o testexon7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
 ```
+
+```
+methyGff -B -o testexon7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+
+methyGff -P -o testexon7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+```
+
+### 3.3 plot meth landscape
+
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f methyGff_7DWT.meth.TSSprofile.txt methyGff_7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName plot_profile_mCG_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CG &
+```
+
+
 
