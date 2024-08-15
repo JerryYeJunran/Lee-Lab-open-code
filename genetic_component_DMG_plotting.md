@@ -272,26 +272,88 @@ methyGff -P -o testexon7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR1
 methyGff --TSS --TTS --GENE -o testexon7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
 ```
 
-### 3.3 plot meth landscape
+> methGff:
+> We can modify this parameter '-distance' to remove the up/down stream region:
+> -d/--distance
+> DNA methylation level distributions in body and <INT>-bp flanking sequences. The distance of upstream and downstream. default:2000
+> can not be set to 0! Try -d 1 10 100 1000
+> strange... all -d does not work? It's that because I only used BED file specifying exon region????
+> don't include -d and -bl at the same time! 
+> we can also change the gene length as well, since exon usually doesn't each 2K:
+> -bl/--bodyLen
+> Body length to which all regions will be fit. (default: same as -d, which is 2k bp)
+> *by this mean, we can plot gene at different length category - but first we have to filter the GTF file / BED file based on length feature in prior.
+> Command Format :   methyGff [options] -o <OUT_PREFIX> -G GENOME -gff <GFF file>/-gtf <GTF file>/-b <bed file>/-b4 <bed4 file> -m <from Split methratio outfile> [-B] [-P]
+
+
+Usage:
+	-o|--out         Output file prefix
+	-G|--genome      Genome
+	-m|--methratio   Methratio output file.
+	-c|--coverage    >= <INT> coverage. default:4
+	-C               <= <INT> coverage. default 600.
+	-nC              >= <INT> Cs per bins or genes. default:1
+	-gtf|-gff        Gtf/gff file
+	-b|--BED         Bed file, chrom start end
+	-b4              Bed file, chrom start end strand
+	-b5              Bed file, chrom start end geneid strand
+	-d|--distance    DNA methylation level distributions in body and <INT>-bp flanking sequences. The distance of upstream and downstream. default:2000
+	-B|--body        For different analysis input format, gene/TEs body methylation level. [Different Methylation Gene(DMG/DMT...)]
+	-P|--promoter    For different analysis input format.[Different Methylation Promoter(DMP)]
+	--TSS            Caculate matrix for TSS. [Outfile: outPrefix.TSS.cg.n.txt]
+	--TTS            Caculate matrix for TTS. [Outfile: outPrefix.TTS.cg.n.txt] 
+	--GENE           Caculate matrix for GENE and flank 2k. [Outfile: outPrefix.GENE.cg.n.txt] 
+	-s|--step        Gene body and their flanking sequences using an overlapping sliding window of 2% of the sequence length at a step of 1% of the sequence length. So default step: 0.01 (1%), used for profile.
+	-hs|--heatmapstep        Gene body and their flanking sequences using an overlapping sliding window of 20% of the sequence length at a step of 10% of the sequence length. So default step: 0.1 (10%), used for heatmap.
+	-bl|--bodyLen    Body length to which all regions will be fit. (default: same as -d)
+	-S|--chromStep   Caculate the density of genes/TEs in chromsome using an overlapping sliding window of 100000bp at a step of 50000bp, must equal "-s" in Split.. default step: 50000(bp)
+	-h|--help 
+
+> Error message:
+```
+==> test1exon1_7DWT.meth.centerprofile.txt <==
+CG	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
+CHG     ...
+```
 
 ```
-python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f testexon7DWT.meth.TSSprofile.txt testexon7D107.meth.TSSprofile.txt -l exon_7DWT exon_7D107 --outFileName testexon_plot_profile_mCG_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CG &
+methyGff -B -o testexon_s0.001_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt -s 0.001 &
+
+methyGff -B -o test1exon_s0.001_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt -s 0.001 &
+```
+
+### 3.3 plot meth profile (landscape)
+
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f test1exon1_7DWT.meth.TSSprofile.txt test1exon1_7D107.meth.TSSprofile.txt -l exon_7DWT exon_7D107 --outFileName test1exon1_plot_profile_mCG_TSSTES_7D.pdf -s 1 1 1 -xl up TSS TES down --context CG
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f test1exon10_7DWT.meth.TSSprofile.txt test1exon10_7D107.meth.TSSprofile.txt -l exon_7DWT exon_7D107 --outFileName test1exon10_plot_profile_mCG_TSSTES_7D.pdf -s 1 1 1 -xl up TSS TES down --context CG
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f test1exon100_7DWT.meth.TSSprofile.txt test1exon100_7D107.meth.TSSprofile.txt -l exon_7DWT exon_7D107 --outFileName test1exon100_plot_profile_mCG_TSSTES_7D.pdf -s 1 1 1 -xl up TSS TES down --context CG
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f test1exon1000_7DWT.meth.TSSprofile.txt test1exon1000_7D107.meth.TSSprofile.txt -l exon_7DWT exon_7D107 --outFileName test1exon1000_plot_profile_mCG_TSSTES_7D.pdf -s 1 1 1 -xl up TSS TES down --context CG
+
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f testexon7DWT.meth.TSSprofile.txt testexon7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName testexon_plot_profile_CHG_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CHG &
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f testexon7DWT.meth.TSSprofile.txt testexon7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName testexon_plot_profile_CHH_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CHH &
 ```
 
-> We can modify this parameter '-distance' to remove the up/down stream region:
-> -d/--distance
-> DNA methylation level distributions in body and <INT>-bp flanking sequences. The distance of upstream and downstream. default:2000
-> we can also change the gene length as well:
-> -bl/--bodyLen
-> Body length to which all regions will be fit. (default: same as -d, which is 2k bp)
-> *by this mean, we can plot gene at different length category - but first we have to filter the GTF file / BED file based on length feature in prior.
 
 
-### Next
+> usage: bt2profile.py [-f MRFILE [MRFILE ...]] [-l LABEL [LABEL ...]] --outFileName
+                     FILENAME [--sample SAMPLE [SAMPLE ...]] [-s SCALE [SCALE ...]]
+                     [-xl XLABEL [XLABEL ...]] [-yl YLABEL] [-t TITLE [TITLE ...]]
+                     [--yMin YMIN [YMIN ...]] [--yMax YMAX [YMAX ...]]
+                     [--color COLOR [COLOR ...]]
+                     [--legend {0,1,2,3,4,5,6,7,8,9,10,11,12}] [--lastlegend LASTLEGEND]
+                     [--legendsize LEGENDSIZE] [--context CONTEXT] [--pergroup PERGROUP]
+                     [-ft IMAGE_FORMAT] [--dpi DPI] [--help]
+
+
+
+
+### 3.4 plot meth heatmap
 change needed
 ```
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chh.txt -o bt2heatmap_0D107.genomewide.gene.meth.TSSTTS.cgchgchh.pdf --plotmatrix 3x2 --colorMap vlag --centerlabel center -z mCG CHG CHH --zMax 0.3 0.05 0.03 -t "0D107 TSS TTS" &
