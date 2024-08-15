@@ -277,8 +277,13 @@ methyGff --TSS --TTS --GENE -o testexon7DWT.meth -G /home/vcm/araport_reference/
 > -d/--distance
 > DNA methylation level distributions in body and <INT>-bp flanking sequences. The distance of upstream and downstream. default:2000
 > can not be set to 0! Try -d 1 10 100 1000
-> strange... all -d does not work? It's that because I only used BED file specifying exon region????
-> don't include -d and -bl at the same time! 
+> strange... all -d of TSSprofile does not work? It's that because I only used BED file specifying exon region???? But -d larger than 100 works???
+> The TSS profile is flooded with nan, but the centerprofile seems workable. Try -center!
+
+
+> don't include -d and -bl at the same time!
+> Include -bl will return errors??? why???
+
 > we can also change the gene length as well, since exon usually doesn't each 2K:
 > -bl/--bodyLen
 > Body length to which all regions will be fit. (default: same as -d, which is 2k bp)
@@ -316,14 +321,16 @@ CG	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-n
 CHG     ...
 ```
 
+> Try step length - default as 0.01, for finer resolution to 0.001
+*Working on it*
 ```
-methyGff -B -o testexon_s0.001_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt -s 0.001 &
+methyGff -B -o test1exon_s0.001_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt -s 0.001 &
 
 methyGff -B -o test1exon_s0.001_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt -s 0.001 &
 ```
 
 ### 3.3 plot meth profile (landscape)
-
+> not working, all goes to nan... maybe the issue of predefined region by BED???
 ```
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f test1exon1_7DWT.meth.TSSprofile.txt test1exon1_7D107.meth.TSSprofile.txt -l exon_7DWT exon_7D107 --outFileName test1exon1_plot_profile_mCG_TSSTES_7D.pdf -s 1 1 1 -xl up TSS TES down --context CG
 
@@ -350,8 +357,41 @@ python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f testexon7DWT.me
                      [--legendsize LEGENDSIZE] [--context CONTEXT] [--pergroup PERGROUP]
                      [-ft IMAGE_FORMAT] [--dpi DPI] [--help]
 
+*-d 100 + centerprofile : works*
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f test1exon100_7DWT.meth.centerprofile.txt test1exon100_7D107.meth.centerprofile.txt \
+-l exon_7DWT exon_7D107 --outFileName test1exon_d100_plot_profile_mCG_center_7D.pdf \
+-s 1 1 -xl up center down --context CG &
 
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f test1exon100_7DWT.meth.centerprofile.txt test1exon100_7D107.meth.centerprofile.txt \
+-l exon_7DWT exon_7D107 --outFileName test1exon_d100_plot_profile_CHG_center_7D.pdf \
+-s 1 1 -xl up center down --context CHG &
 
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f test1exon100_7DWT.meth.centerprofile.txt test1exon100_7D107.meth.centerprofile.txt \
+-l exon_7DWT exon_7D107 --outFileName test1exon_d100_plot_profile_CHH_center_7D.pdf \
+-s 1 1 -xl up center down --context CHH &
+```
+
+*-s 0.001*
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f testexon_s0.001_7DWT.meth.Methylevel.txt testexon_s0.001_7D107.meth.Methylevel.txt \
+-l exon_7DWT exon_7D107 --outFileName test1exon_s0.001_plot_profile_mCG_center_7D.pdf \
+-s 1 1 -xl up center down --context CG &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f test1exon100_7DWT.meth.centerprofile.txt test1exon100_7D107.meth.centerprofile.txt \
+-l exon_7DWT exon_7D107 --outFileName test1exon_d100_plot_profile_CHG_center_7D.pdf \
+-s 1 1 -xl up center down --context CHG &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f test1exon100_7DWT.meth.centerprofile.txt test1exon100_7D107.meth.centerprofile.txt \
+-l exon_7DWT exon_7D107 --outFileName test1exon_d100_plot_profile_CHH_center_7D.pdf \
+-s 1 1 -xl up center down --context CHH &
+```
 
 ### 3.4 plot meth heatmap
 change needed
