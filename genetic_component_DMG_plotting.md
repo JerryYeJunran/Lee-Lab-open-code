@@ -275,12 +275,26 @@ methyGff --TSS --TTS --GENE -o testexon7DWT.meth -G /home/vcm/araport_reference/
 ### 3.3 plot meth landscape
 
 ```
-python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f methyGff_7DWT.meth.TSSprofile.txt testexon7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName testexon_plot_profile_mCG_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CG &
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f testexon7DWT.meth.TSSprofile.txt testexon7D107.meth.TSSprofile.txt -l exon_7DWT exon_7D107 --outFileName testexon_plot_profile_mCG_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CG &
 
-python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f methyGff_7DWT.meth.TSSprofile.txt testexon7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName testexon_plot_profile_CHG_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CHG &
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f testexon7DWT.meth.TSSprofile.txt testexon7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName testexon_plot_profile_CHG_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CHG &
 
-python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f methyGff_7DWT.meth.TSSprofile.txt testexon7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName testexon_plot_profile_CHH_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CHH &
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py -f testexon7DWT.meth.TSSprofile.txt testexon7D107.meth.TSSprofile.txt -l gene_7DWT gene_7D107 --outFileName testexon_plot_profile_CHH_TSSTES_7D.pdf -s 1 1 1 -xl up2k TSS TES down2k --context CHH &
 ```
 
+> We can modify this parameter '-distance' to remove the up/down stream region:
+> -d/--distance
+> DNA methylation level distributions in body and <INT>-bp flanking sequences. The distance of upstream and downstream. default:2000
+> we can also change the gene length as well:
+> -bl/--bodyLen
+> Body length to which all regions will be fit. (default: same as -d, which is 2k bp)
+> *by this mean, we can plot gene at different length category - but first we have to filter the GTF file / BED file based on length feature in prior.
+
+
+### Next
+change needed
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2heatmap.py -m methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.cg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chg.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TSS.chh.txt methyGff_for-heatmap_0D107.genomewide.gene.meth.TTS.chh.txt -o bt2heatmap_0D107.genomewide.gene.meth.TSSTTS.cgchgchh.pdf --plotmatrix 3x2 --colorMap vlag --centerlabel center -z mCG CHG CHH --zMax 0.3 0.05 0.03 -t "0D107 TSS TTS" &
+```
 
 
