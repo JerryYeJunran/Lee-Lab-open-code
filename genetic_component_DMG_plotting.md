@@ -257,19 +257,19 @@ Chr1    17      +       CHH     0       25      0.000000        25.0    61      
 > Trial on 1 file
 
 ```
-methyGff -B -o testexon7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+methyGff -B -o testexon_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
 
-methyGff -P -o testexon7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+methyGff -P -o testexon_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
 
-methyGff --TSS --TTS --GENE -o testexon7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+methyGff --TSS --TTS --GENE -o testexon_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
 ```
 
 ```
-methyGff -B -o testexon7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+methyGff -B -o testexon_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
 
-methyGff -P -o testexon7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+methyGff -P -o testexon_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
 
-methyGff --TSS --TTS --GENE -o testexon7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+methyGff --TSS --TTS --GENE -o testexon_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
 ```
 
 > methGff:
@@ -322,12 +322,13 @@ CHG     ...
 ```
 
 > Try step length - default as 0.01, for finer resolution to 0.001
-*Working on it*
-```
-methyGff -B -o test1exon_s0.001_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt -s 0.001 &
+*...Not working, it will shrink off the middle part of the gene... I guess it's smaller the size to 1/10 compared than before?*
+> -s 0.1 doesn't work. Any changes on -s won't work!
 
-methyGff -B -o test1exon_s0.001_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt -s 0.001 &
-```
+methyGff -B -o test1exon_s0.1_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt -s 0.1 &
+
+methyGff -B -o test1exon_s0.1_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt -s 0.1 &
+
 
 ### 3.3 plot meth profile (landscape)
 > not working, all goes to nan... maybe the issue of predefined region by BED???
@@ -375,21 +376,45 @@ python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
 -s 1 1 -xl up center down --context CHH &
 ```
 
-*-s 0.001*
+*-s 0.001 -- does not work*
+*-s 0.1 -- does not work*
+*Just don't edit -s!!!!!*
+
 ```
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
--f testexon_s0.001_7DWT.meth.Methylevel.txt testexon_s0.001_7D107.meth.Methylevel.txt \
--l exon_7DWT exon_7D107 --outFileName test1exon_s0.001_plot_profile_mCG_center_7D.pdf \
+-f testexon7DWT.meth.centerprofile.txt testexon7D107.meth.centerprofile.txt \
+-l exon_7DWT exon_7D107 --outFileName test1exon3_plot_profile_mCG_center_7D.pdf \
+-s 10 10 -xl up center down --context CG &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f testexon7DWT.meth.centerprofile.txt testexon7D107.meth.centerprofile.txt \
+-l exon_7DWT exon_7D107 --outFileName test1exon3_plot_profile_CHG_center_7D.pdf \
+-s 10 10 -xl up center down --context CHG &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f testexon7DWT.meth.centerprofile.txt testexon7D107.meth.centerprofile.txt \
+-l exon_7DWT exon_7D107 --outFileName test1exon3_plot_profile_CHH_center_7D.pdf \
+-s 10 10 -xl up center down --context CHH &
+```
+
+*try AverMethylevel...*
+*Missing middle part; don't know what happen! It's the issue of exon file.*
+*If we try the whole file like below, it works:) and it's BEAUTIFUL!!!!!!! Try this later!!!*
+*Working*
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f methyGff_for-heatmap_7DWT.genomewide.gene.meth.AverMethylevel.txt methyGff_for-heatmap_7D107.genomewide.gene.meth.AverMethylevel.txt \
+-l gene_7DWT gene_7D107 --outFileName testAverM_plot_profile_mCG_7D.pdf \
 -s 1 1 -xl up center down --context CG &
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
--f test1exon100_7DWT.meth.centerprofile.txt test1exon100_7D107.meth.centerprofile.txt \
--l exon_7DWT exon_7D107 --outFileName test1exon_d100_plot_profile_CHG_center_7D.pdf \
+-f methyGff_for-heatmap_7DWT.genomewide.gene.meth.AverMethylevel.txt methyGff_for-heatmap_7D107.genomewide.gene.meth.AverMethylevel.txt \
+-l gene_7DWT gene_7D107 --outFileName testAverM_plot_profile_CHG_7D.pdf \
 -s 1 1 -xl up center down --context CHG &
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
--f test1exon100_7DWT.meth.centerprofile.txt test1exon100_7D107.meth.centerprofile.txt \
--l exon_7DWT exon_7D107 --outFileName test1exon_d100_plot_profile_CHH_center_7D.pdf \
+-f methyGff_for-heatmap_7DWT.genomewide.gene.meth.AverMethylevel.txt methyGff_for-heatmap_7D107.genomewide.gene.meth.AverMethylevel.txt \
+-l gene_7DWT gene_7D107 --outFileName testAverM_plot_profile_CHH_7D.pdf \
 -s 1 1 -xl up center down --context CHH &
 ```
 
