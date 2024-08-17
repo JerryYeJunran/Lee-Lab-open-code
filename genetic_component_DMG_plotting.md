@@ -254,22 +254,51 @@ Chr1    17      +       CHH     0       25      0.000000        25.0    61      
 ...
 ```
 
-> Trial on 1 file
+> Trial on 1 file -- finished. Now working on draft!
 
+> 7D
 ```
-methyGff -B -o testexon_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+methyGff -B -o exon_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
 
-methyGff -P -o testexon_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+methyGff -P -o exon_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
 
-methyGff --TSS --TTS --GENE -o testexon_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+methyGff --TSS --TTS --GENE -o exon_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+
+methyGff -B -o exon_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+
+methyGff -P -o exon_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o exon_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
 ```
 
+> 3D
 ```
-methyGff -B -o testexon_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+methyGff -B -o exon_3D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3D107.methratio.txt &
 
-methyGff -P -o testexon_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+methyGff -P -o exon_3D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3D107.methratio.txt &
 
-methyGff --TSS --TTS --GENE -o testexon_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+methyGff --TSS --TTS --GENE -o exon_3D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3D107.methratio.txt &
+
+methyGff -B -o exon_3DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3DWT.methratio.txt &
+
+methyGff -P -o exon_3DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3DWT.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o exon_3DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3DWT.methratio.txt &
+```
+
+> 0D
+```
+methyGff -B -o exon_0D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0day107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0D107.methratio.txt &
+
+methyGff -P -o exon_0D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0day107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0D107.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o exon_0D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0day107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0D107.methratio.txt &
+
+methyGff -B -o exon_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
+
+methyGff -P -o exon_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o exon_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
 ```
 
 > methGff:
@@ -380,23 +409,60 @@ python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
 *-s 0.1 -- does not work*
 *Just don't edit -s!!!!!*
 
+#### plot center profile for genetic components!!!
+> 7D
 ```
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
--f testexon7DWT.meth.centerprofile.txt testexon7D107.meth.centerprofile.txt \
--l exon_7DWT exon_7D107 --outFileName test1exon3_plot_profile_mCG_center_7D.pdf \
--s 10 10 -xl up center down --context CG &
+-f exon7DWT.meth.centerprofile.txt exon7D107.meth.centerprofile.txt \
+-l exon_7DWT exon_7D107 --outFileName exon_plot_centerprofile_mCG_7D.pdf \
+-s 1 1 -xl up center down --context CG &
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
--f testexon7DWT.meth.centerprofile.txt testexon7D107.meth.centerprofile.txt \
--l exon_7DWT exon_7D107 --outFileName test1exon3_plot_profile_CHG_center_7D.pdf \
--s 10 10 -xl up center down --context CHG &
+-f exon7DWT.meth.centerprofile.txt exon7D107.meth.centerprofile.txt \
+-l exon_7DWT exon_7D107 --outFileName exon_plot_centerprofile_CHG_7D.pdf \
+-s 1 1 -xl up center down --context CHG &
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
--f testexon7DWT.meth.centerprofile.txt testexon7D107.meth.centerprofile.txt \
--l exon_7DWT exon_7D107 --outFileName test1exon3_plot_profile_CHH_center_7D.pdf \
--s 10 10 -xl up center down --context CHH &
+-f exon7DWT.meth.centerprofile.txt exon7D107.meth.centerprofile.txt \
+-l exon_7DWT exon_7D107 --outFileName exon_plot_centerprofile_CHH_7D.pdf \
+-s 1 1 -xl up center down --context CHH &
+```
+> 3D
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f exon3DWT.meth.centerprofile.txt exon3D107.meth.centerprofile.txt \
+-l exon_3DWT exon_7D107 --outFileName exon_plot_centerprofile_mCG_3D.pdf \
+-s 1 1 -xl up center down --context CG &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f exon3DWT.meth.centerprofile.txt exon3D107.meth.centerprofile.txt \
+-l exon_3DWT exon_3D107 --outFileName exon_plot_centerprofile_CHG_3D.pdf \
+-s 1 1 -xl up center down --context CHG &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f exon3DWT.meth.centerprofile.txt exon3D107.meth.centerprofile.txt \
+-l exon_3DWT exon_3D107 --outFileName exon_plot_centerprofile_CHH_3D.pdf \
+-s 1 1 -xl up center down --context CHH &
+```
+> 0D
+```
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f exon7DWT.meth.centerprofile.txt exon7D107.meth.centerprofile.txt \
+-l exon_7DWT exon_7D107 --outFileName exon_plot_centerprofile_mCG_7D.pdf \
+-s 1 1 -xl up center down --context CG &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f exon7DWT.meth.centerprofile.txt exon7D107.meth.centerprofile.txt \
+-l exon_7DWT exon_7D107 --outFileName exon_plot_centerprofile_CHG_7D.pdf \
+-s 1 1 -xl up center down --context CHG &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f exon7DWT.meth.centerprofile.txt exon7D107.meth.centerprofile.txt \
+-l exon_7DWT exon_7D107 --outFileName exon_plot_centerprofile_CHH_7D.pdf \
+-s 1 1 -xl up center down --context CHH &
 ```
 
+#### Use this!!! AverMeth!!! for whole genome!!!
 *try AverMethylevel...*
 *Missing middle part; don't know what happen! It's the issue of exon file.*
 *If we try the whole file like below, it works:) and it's BEAUTIFUL!!!!!!! Try this later!!!*
