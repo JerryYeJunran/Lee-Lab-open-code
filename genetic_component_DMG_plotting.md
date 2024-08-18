@@ -126,6 +126,7 @@ track type=bedGraph
 ```
 # make first column to be 'Chr' + num
 ```
+```
 for file in /home/vcm/IGV/Methylation/*.bedGraph; do tail -n +2 $file > ${file%.bedGraph}_unannotated.bed; echo ${file%.bedGraph}_unannotated.bed; done
 
 mv ~/IGV/Methylation/*_unannotated.bed ~/BSseq_rep2_batmeth/genetic_component
