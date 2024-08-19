@@ -154,7 +154,7 @@ bedtools intersect -a A.bed -b B.Araport11.position -wa -wb
 for file in CHG_context_*.bed; do bedtools intersect -a A.bed -b B.Araport11.position -wa -wb | bedtools groupby -i - -g 1,2,4,5,7,8,9 -c 7 -o collapse > C.bed; echo $file; done &
 ```
 
-> Trial sample
+> Trial sample ... completed!
 bedtools intersect -a 3days107_unannotated.bed -b /home/vcm/araport_reference/exon.Araport11.position -wa -wb
 > output
 ```
@@ -168,8 +168,13 @@ Chr1    191184  191185  0       Chr1    191138  191258  AT1G01520       exon
 bedtools intersect -a 3days107_unannotated.bed -b /home/vcm/araport_reference/exon.Araport11.position -wa -wb | bedtools groupby -i - -g 1,2,3,4,8 -c 9 -o collapse > test.bed
 
 > Code
+#### Exon
 ```
 for file in *_unannotated.bed; do bedtools intersect -a $file -b /home/vcm/araport_reference/exon.Araport11.position -wa -wb | bedtools groupby -i - -g 1,2,3,4,8 -c 9 -o collapse > ${file%_unannotated.bed}_exon_annotated.bed; echo ${file%_unannotated.bed}_exon_annotated.bed; done &
+```
+#### five_prime_UTR
+```
+for file in *_unannotated.bed; do bedtools intersect -a $file -b /home/vcm/araport_reference/five_prime_UTR.Araport11.position -wa -wb | bedtools groupby -i - -g 1,2,3,4,8 -c 9 -o collapse > ${file%_unannotated.bed}_5UTR_annotated.bed; echo ${file%_unannotated.bed}_5UTR_annotated.bed; done &
 ```
 
 # Step 3: run batmeth2 plotting
@@ -257,6 +262,7 @@ Chr1    17      +       CHH     0       25      0.000000        25.0    61      
 
 > Trial on 1 file -- finished. Now working on draft!
 
+#### Exon
 > 7D
 ```
 methyGff -B -o exon_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
@@ -300,6 +306,52 @@ methyGff -B -o exon_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_c
 methyGff -P -o exon_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
 
 methyGff --TSS --TTS --GENE -o exon_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
+```
+
+#### five_prime_UTR (5UTR)
+> 7D
+```
+methyGff -B -o 5UTR_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+
+methyGff -P -o 5UTR_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o 5UTR_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+
+methyGff -B -o 5UTR_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+
+methyGff -P -o 5UTR_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o 5UTR_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+```
+
+> 3D
+```
+methyGff -B -o 5UTR_3D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3days107_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3D107.methratio.txt &
+
+methyGff -P -o 5UTR_3D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3days107_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3D107.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o 5UTR_3D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3days107_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3D107.methratio.txt &
+
+methyGff -B -o 5UTR_3DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3daysWT_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3DWT.methratio.txt &
+
+methyGff -P -o 5UTR_3DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3daysWT_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3DWT.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o 5UTR_3DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3daysWT_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3DWT.methratio.txt &
+```
+
+> 0D
+```
+methyGff -B -o 5UTR_0D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0day107_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0D107.methratio.txt &
+
+methyGff -P -o 5UTR_0D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0day107_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0D107.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o 5UTR_0D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0day107_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0D107.methratio.txt &
+
+methyGff -B -o 5UTR_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
+
+methyGff -P -o 5UTR_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o 5UTR_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
 ```
 
 > methGff:
@@ -414,52 +466,52 @@ python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
 > 7D
 ```
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
--f exon7DWT.meth.centerprofile.txt exon7D107.meth.centerprofile.txt \
+-f exon_7DWT.meth.centerprofile.txt exon_7D107.meth.centerprofile.txt \
 -l exon_7DWT exon_7D107 --outFileName exon_plot_centerprofile_mCG_7D.pdf \
 -s 1 1 -xl up center down --context CG &
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
--f exon7DWT.meth.centerprofile.txt exon7D107.meth.centerprofile.txt \
+-f exon_7DWT.meth.centerprofile.txt exon_7D107.meth.centerprofile.txt \
 -l exon_7DWT exon_7D107 --outFileName exon_plot_centerprofile_CHG_7D.pdf \
 -s 1 1 -xl up center down --context CHG &
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
--f exon7DWT.meth.centerprofile.txt exon7D107.meth.centerprofile.txt \
+-f exon_7DWT.meth.centerprofile.txt exon_7D107.meth.centerprofile.txt \
 -l exon_7DWT exon_7D107 --outFileName exon_plot_centerprofile_CHH_7D.pdf \
 -s 1 1 -xl up center down --context CHH &
 ```
 > 3D
 ```
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
--f exon3DWT.meth.centerprofile.txt exon3D107.meth.centerprofile.txt \
+-f exon_3DWT.meth.centerprofile.txt exon_3D107.meth.centerprofile.txt \
 -l exon_3DWT exon_7D107 --outFileName exon_plot_centerprofile_mCG_3D.pdf \
 -s 1 1 -xl up center down --context CG &
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
--f exon3DWT.meth.centerprofile.txt exon3D107.meth.centerprofile.txt \
+-f exon_3DWT.meth.centerprofile.txt exon_3D107.meth.centerprofile.txt \
 -l exon_3DWT exon_3D107 --outFileName exon_plot_centerprofile_CHG_3D.pdf \
 -s 1 1 -xl up center down --context CHG &
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
--f exon3DWT.meth.centerprofile.txt exon3D107.meth.centerprofile.txt \
+-f exon_3DWT.meth.centerprofile.txt exon_3D107.meth.centerprofile.txt \
 -l exon_3DWT exon_3D107 --outFileName exon_plot_centerprofile_CHH_3D.pdf \
 -s 1 1 -xl up center down --context CHH &
 ```
 > 0D
 ```
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
--f exon7DWT.meth.centerprofile.txt exon7D107.meth.centerprofile.txt \
--l exon_7DWT exon_7D107 --outFileName exon_plot_centerprofile_mCG_7D.pdf \
+-f exon_0DWT.meth.centerprofile.txt exon_0D107.meth.centerprofile.txt \
+-l exon_0DWT exon_0D107 --outFileName exon_plot_centerprofile_mCG_0D.pdf \
 -s 1 1 -xl up center down --context CG &
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
--f exon7DWT.meth.centerprofile.txt exon7D107.meth.centerprofile.txt \
--l exon_7DWT exon_7D107 --outFileName exon_plot_centerprofile_CHG_7D.pdf \
+-f exon_0DWT.meth.centerprofile.txt exon_0D107.meth.centerprofile.txt \
+-l exon_0DWT exon_0D107 --outFileName exon_plot_centerprofile_CHG_0D.pdf \
 -s 1 1 -xl up center down --context CHG &
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
--f exon7DWT.meth.centerprofile.txt exon7D107.meth.centerprofile.txt \
--l exon_7DWT exon_7D107 --outFileName exon_plot_centerprofile_CHH_7D.pdf \
+-f exon_0DWT.meth.centerprofile.txt exon_0D107.meth.centerprofile.txt \
+-l exon_0DWT exon_0D107 --outFileName exon_plot_centerprofile_CHH_0D.pdf \
 -s 1 1 -xl up center down --context CHH &
 ```
 
