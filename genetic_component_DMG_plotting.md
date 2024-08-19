@@ -86,6 +86,11 @@ Chr1    6788    6914    AT1G01020       three_prime_UTR
 ...
 ```
 
+> output file - transposable_element_gene.Araport11.position
+```
+working!!!
+```
+
 > Code
 ```
 (protein_coding)
@@ -96,6 +101,7 @@ zcat Araport11.gtf.gz |perl -alne '{next unless $F[2] eq "exon" ;/gene_id \"(.*?
 zcat Araport11.gtf.gz |perl -alne '{next unless $F[2] eq "five_prime_UTR" ;/gene_id \"(.*?)\";/; print "$F[0]\t$F[3]\t$F[4]\t$1\t$F[2]" }' > five_prime_UTR.Araport11.position
 (three_prime_UTR)
 zcat Araport11.gtf.gz |perl -alne '{next unless $F[2] eq "three_prime_UTR" ;/gene_id \"(.*?)\";/; print "$F[0]\t$F[3]\t$F[4]\t$1\t$F[2]" }' > three_prime_UTR.Araport11.position
+zcat Araport11.gtf.gz |perl -alne '{next unless $F[2] eq "transposable_element_gene" ;/gene_id \"(.*?)\";/; print "$F[0]\t$F[3]\t$F[4]\t$1\t$F[2]" }' > transposable_element_gene.Araport11.position
 ```
 
 # Step2: bed intersect
@@ -175,6 +181,14 @@ for file in *_unannotated.bed; do bedtools intersect -a $file -b /home/vcm/arapo
 #### five_prime_UTR
 ```
 for file in *_unannotated.bed; do bedtools intersect -a $file -b /home/vcm/araport_reference/five_prime_UTR.Araport11.position -wa -wb | bedtools groupby -i - -g 1,2,3,4,8 -c 9 -o collapse > ${file%_unannotated.bed}_5UTR_annotated.bed; echo ${file%_unannotated.bed}_5UTR_annotated.bed; done &
+```
+#### three_prime_UTR
+```
+for file in *_unannotated.bed; do bedtools intersect -a $file -b /home/vcm/araport_reference/three_prime_UTR.Araport11.position -wa -wb | bedtools groupby -i - -g 1,2,3,4,8 -c 9 -o collapse > ${file%_unannotated.bed}_3UTR_annotated.bed; echo ${file%_unannotated.bed}_3UTR_annotated.bed; done &
+```
+#### transposable_element_gene
+```
+for file in *_unannotated.bed; do bedtools intersect -a $file -b /home/vcm/araport_reference/transposable_element_gene.Araport11.position -wa -wb | bedtools groupby -i - -g 1,2,3,4,8 -c 9 -o collapse > ${file%_unannotated.bed}_transposable_element_gene_annotated.bed; echo ${file%_unannotated.bed}_transposable_element_gene_annotated.bed; done &
 ```
 
 # Step 3: run batmeth2 plotting
@@ -352,6 +366,98 @@ methyGff -B -o 5UTR_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_c
 methyGff -P -o 5UTR_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
 
 methyGff --TSS --TTS --GENE -o 5UTR_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_5UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
+```
+
+#### three_prime_UTR (3UTR) ...working
+> 7D
+```
+methyGff -B -o 3UTR_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+
+methyGff -P -o 3UTR_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o 3UTR_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+
+methyGff -B -o 3UTR_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+
+methyGff -P -o 3UTR_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o 3UTR_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+```
+
+> 3D
+```
+methyGff -B -o 3UTR_3D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3days107_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3D107.methratio.txt &
+
+methyGff -P -o 3UTR_3D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3days107_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3D107.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o 3UTR_3D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3days107_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3D107.methratio.txt &
+
+methyGff -B -o 3UTR_3DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3daysWT_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3DWT.methratio.txt &
+
+methyGff -P -o 3UTR_3DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3daysWT_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3DWT.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o 3UTR_3DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3daysWT_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3DWT.methratio.txt &
+```
+
+> 0D
+```
+methyGff -B -o 3UTR_0D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0day107_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0D107.methratio.txt &
+
+methyGff -P -o 3UTR_0D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0day107_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0D107.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o 3UTR_0D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0day107_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0D107.methratio.txt &
+
+methyGff -B -o 3UTR_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
+
+methyGff -P -o 3UTR_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o 3UTR_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_3UTR_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
+```
+
+#### 
+> 7D
+```
+methyGff -B -o exon_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+
+methyGff -P -o exon_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o exon_7D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7D107.methratio.txt &
+
+methyGff -B -o exon_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+
+methyGff -P -o exon_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o exon_7DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/7daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_7DWT.methratio.txt &
+```
+
+> 3D
+```
+methyGff -B -o exon_3D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3D107.methratio.txt &
+
+methyGff -P -o exon_3D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3D107.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o exon_3D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3days107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3D107.methratio.txt &
+
+methyGff -B -o exon_3DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3DWT.methratio.txt &
+
+methyGff -P -o exon_3DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3DWT.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o exon_3DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/3daysWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_3DWT.methratio.txt &
+```
+
+> 0D
+```
+methyGff -B -o exon_0D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0day107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0D107.methratio.txt &
+
+methyGff -P -o exon_0D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0day107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0D107.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o exon_0D107.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0day107_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0D107.methratio.txt &
+
+methyGff -B -o exon_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
+
+methyGff -P -o exon_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
+
+methyGff --TSS --TTS --GENE -o exon_0DWT.meth -G /home/vcm/araport_reference/TAIR10_ref/TAIR10_chr_all.fas -b ~/BSseq_rep2_batmeth/genetic_component/S0dayWT_exon_annotated.bed -m ~/BSseq_rep2_batmeth/genetic_component/methratio/calmeth_0DWT.methratio.txt &
 ```
 
 > methGff:
