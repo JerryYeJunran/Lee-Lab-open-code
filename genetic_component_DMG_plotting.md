@@ -569,6 +569,7 @@ python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
 *Just don't edit -s!!!!!*
 
 #### plot center profile for genetic components!!!
+#### Exon
 > 7D
 ```
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
@@ -619,6 +620,89 @@ python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
 -f exon_0DWT.meth.centerprofile.txt exon_0D107.meth.centerprofile.txt \
 -l exon_0DWT exon_0D107 --outFileName exon_plot_centerprofile_CHH_0D.pdf \
 -s 1 1 -xl up center down --context CHH &
+```
+
+#### 5UTR
+> Code with Loop
+```
+for time_point in 0D 3D 7D; do \
+    file1="5UTR_${time_point}WT.meth.centerprofile.txt" \
+    file2="5UTR_${time_point}107.meth.centerprofile.txt"; \
+    echo "Processing pair: $file1 and $file2, context mCG"; \
+	python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+	-f $file1 $file2 \
+	-l ${file1%.meth.centerprofile.txt} ${file1%.meth.centerprofile.txt} \
+	--outFileName 5UTR_plot_centerprofile_mCG_${time_point}.pdf \
+	-s 1 1 -xl up center down --context CG; \
+    echo "Processing pair: $file1 and $file2, context CHG"; \
+	python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+	-f $file1 $file2 \
+	-l ${file1%.meth.centerprofile.txt} ${file1%.meth.centerprofile.txt} \
+	--outFileName 5UTR_plot_centerprofile_CHG_${time_point}.pdf \
+	-s 1 1 -xl up center down --context CHG; \
+    echo "Processing pair: $file1 and $file2, context CHH"; \
+	python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+	-f $file1 $file2 \
+	-l ${file1%.meth.centerprofile.txt} ${file1%.meth.centerprofile.txt} \
+	--outFileName 5UTR_plot_centerprofile_CHH_${time_point}.pdf \
+	-s 1 1 -xl up center down --context CHH; \
+    echo "Process completed"; \
+done
+```
+
+#### 3UTR
+
+```
+for time_point in 0D 3D 7D; do \
+    file1="3UTR_${time_point}WT.meth.centerprofile.txt" \
+    file2="3UTR_${time_point}107.meth.centerprofile.txt"; \
+    echo "Processing pair: $file1 and $file2, context mCG"; \
+	python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+	-f $file1 $file2 \
+	-l ${file1%.meth.centerprofile.txt} ${file1%.meth.centerprofile.txt} \
+	--outFileName 3UTR_plot_centerprofile_mCG_${time_point}.pdf \
+	-s 1 1 -xl up center down --context CG; \
+    echo "Processing pair: $file1 and $file2, context CHG"; \
+	python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+	-f $file1 $file2 \
+	-l ${file1%.meth.centerprofile.txt} ${file1%.meth.centerprofile.txt} \
+	--outFileName 3UTR_plot_centerprofile_CHG_${time_point}.pdf \
+	-s 1 1 -xl up center down --context CHG; \
+    echo "Processing pair: $file1 and $file2, context CHH"; \
+	python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+	-f $file1 $file2 \
+	-l ${file1%.meth.centerprofile.txt} ${file1%.meth.centerprofile.txt} \
+	--outFileName 3UTR_plot_centerprofile_CHH_${time_point}.pdf \
+	-s 1 1 -xl up center down --context CHH; \
+    echo "Process completed"; \
+done
+```
+
+#### transposon
+```
+for time_point in 0D 3D 7D; do \
+    file1="transposon_${time_point}WT.meth.centerprofile.txt" \
+    file2="transposon_${time_point}107.meth.centerprofile.txt"; \
+    echo "Processing pair: $file1 and $file2, context mCG"; \
+	python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+	-f $file1 $file2 \
+	-l ${file1%.meth.centerprofile.txt} ${file1%.meth.centerprofile.txt} \
+	--outFileName transposon_plot_centerprofile_mCG_${time_point}.pdf \
+	-s 1 1 -xl up center down --context CG; \
+    echo "Processing pair: $file1 and $file2, context CHG"; \
+	python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+	-f $file1 $file2 \
+	-l ${file1%.meth.centerprofile.txt} ${file1%.meth.centerprofile.txt} \
+	--outFileName transposon_plot_centerprofile_CHG_${time_point}.pdf \
+	-s 1 1 -xl up center down --context CHG; \
+    echo "Processing pair: $file1 and $file2, context CHH"; \
+	python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+	-f $file1 $file2 \
+	-l ${file1%.meth.centerprofile.txt} ${file1%.meth.centerprofile.txt} \
+	--outFileName transposon_plot_centerprofile_CHH_${time_point}.pdf \
+	-s 1 1 -xl up center down --context CHH; \
+    echo "Process completed"; \
+done
 ```
 
 #### Use this!!! AverMeth!!! for whole genome!!!
