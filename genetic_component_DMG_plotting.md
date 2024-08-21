@@ -705,6 +705,64 @@ for time_point in 0D 3D 7D; do \
 done
 ```
 
+#### Unite four contexts in 1 plot
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f exon_7DWT.meth.centerprofile.txt exon_7D107.meth.centerprofile.txt \
+5UTR_7DWT.meth.centerprofile.txt 5UTR_7D107.meth.centerprofile.txt \
+3UTR_7DWT.meth.centerprofile.txt 3UTR_7D107.meth.centerprofile.txt \
+transposon_7DWT.meth.centerprofile.txt transposon_7D107.meth.centerprofile.txt \
+-l exon_7DWT exon_7D107 5UTR_7DWT 5UTR_7D107 3UTR_7DWT 3UTR_7D107 transposon_7DWT transposon_7D107 \
+--outFileName test7D.pdf \
+-s 1 1 -xl up center down --context CG,CHG,CHH &
+
+#### All comparative to transposon, no label
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f exon_7DWT.meth.centerprofile.txt exon_7D107.meth.centerprofile.txt \
+transposon_7DWT.meth.centerprofile.txt transposon_7D107.meth.centerprofile.txt \
+--outFileName transposon_exon_7D.pdf \
+-l exon_7DWT exon_7D107 transposon_7DWT transposon_7D107 \
+--legend 11 \
+-s 1 1 -xl up center down --context CG,CHG,CHH &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f exon_3DWT.meth.centerprofile.txt exon_3D107.meth.centerprofile.txt \
+transposon_3DWT.meth.centerprofile.txt transposon_3D107.meth.centerprofile.txt \
+--outFileName transposon_exon_3D.pdf \
+-l exon_3DWT exon_3D107 transposon_3DWT transposon_3D107 \
+--legend 11 \
+-s 1 1 -xl up center down --context CG,CHG,CHH &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f exon_0DWT.meth.centerprofile.txt exon_0D107.meth.centerprofile.txt \
+transposon_0DWT.meth.centerprofile.txt transposon_0D107.meth.centerprofile.txt \
+--outFileName transposon_exon_0D.pdf \
+-l exon_0DWT exon_0D107 transposon_0DWT transposon_0D107 \
+--legend 11 \
+-s 1 1 -xl up center down --context CG,CHG,CHH &
+######################
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f 5UTR_7DWT.meth.centerprofile.txt 5UTR_7D107.meth.centerprofile.txt \
+transposon_7DWT.meth.centerprofile.txt transposon_7D107.meth.centerprofile.txt \
+--outFileName test5UTR7D.pdf \
+--legend 11 \
+-l 5UTR_7DWT 5UTR_7D107 transposon_7DWT transposon_7D107 \
+-s 1 1 -xl up center down --context CG,CHG,CHH &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f 3UTR_7DWT.meth.centerprofile.txt 3UTR_7D107.meth.centerprofile.txt \
+transposon_7DWT.meth.centerprofile.txt transposon_7D107.meth.centerprofile.txt \
+--outFileName test3UTR7D.pdf \
+--legend 11 \
+-l 3UTR_7DWT 3UTR_7D107 transposon_7DWT transposon_7D107 \
+-s 1 1 -xl up center down --context CG,CHG,CHH &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f transposon_7DWT.meth.centerprofile.txt transposon_7D107.meth.centerprofile.txt \
+--outFileName transposon_7D.pdf \
+--legend 11 \
+-l transposon_7DWT transposon_7D107 \
+-s 1 1 -xl up center down --context CG,CHG,CHH &
+
 #### Use this!!! AverMeth!!! for whole genome!!!
 *try AverMethylevel...*
 *Missing middle part; don't know what happen! It's the issue of exon file.*
