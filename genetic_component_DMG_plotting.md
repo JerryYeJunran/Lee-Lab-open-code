@@ -721,7 +721,7 @@ python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
 transposon_7DWT.meth.centerprofile.txt transposon_7D107.meth.centerprofile.txt \
 --outFileName transposon_exon_7D.pdf \
 -l exon_7DWT exon_7D107 transposon_7DWT transposon_7D107 \
---legend 11 \
+--legend 11 --dpi 1000 \
 -s 1 1 -xl up center down --context CG,CHG,CHH &
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
@@ -729,7 +729,7 @@ python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
 transposon_3DWT.meth.centerprofile.txt transposon_3D107.meth.centerprofile.txt \
 --outFileName transposon_exon_3D.pdf \
 -l exon_3DWT exon_3D107 transposon_3DWT transposon_3D107 \
---legend 11 \
+--legend 11 --dpi 1000 \
 -s 1 1 -xl up center down --context CG,CHG,CHH &
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
@@ -737,31 +737,79 @@ python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
 transposon_0DWT.meth.centerprofile.txt transposon_0D107.meth.centerprofile.txt \
 --outFileName transposon_exon_0D.pdf \
 -l exon_0DWT exon_0D107 transposon_0DWT transposon_0D107 \
---legend 11 \
+--legend 11 --dpi 1000 \
 -s 1 1 -xl up center down --context CG,CHG,CHH &
 ######################
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
 -f 5UTR_7DWT.meth.centerprofile.txt 5UTR_7D107.meth.centerprofile.txt \
 transposon_7DWT.meth.centerprofile.txt transposon_7D107.meth.centerprofile.txt \
---outFileName test5UTR7D.pdf \
---legend 11 \
+--outFileName transposon_5UTR_7D.pdf \
+--legend 11 --dpi 1000 \
 -l 5UTR_7DWT 5UTR_7D107 transposon_7DWT transposon_7D107 \
 -s 1 1 -xl up center down --context CG,CHG,CHH &
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f 5UTR_3DWT.meth.centerprofile.txt 5UTR_3D107.meth.centerprofile.txt \
+transposon_3DWT.meth.centerprofile.txt transposon_3D107.meth.centerprofile.txt \
+--outFileName transposon_5UTR_3D.pdf \
+--legend 11 --dpi 1000 \
+-l 5UTR_3DWT 5UTR_3D107 transposon_3DWT transposon_3D107 \
+-s 1 1 -xl up center down --context CG,CHG,CHH &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f 5UTR_0DWT.meth.centerprofile.txt 5UTR_0D107.meth.centerprofile.txt \
+transposon_0DWT.meth.centerprofile.txt transposon_0D107.meth.centerprofile.txt \
+--outFileName transposon_5UTR_0D.pdf \
+--legend 11 --dpi 1000 \
+-l 5UTR_0DWT 5UTR_0D107 transposon_0DWT transposon_0D107 \
+-s 1 1 -xl up center down --context CG,CHG,CHH &
+########################
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
 -f 3UTR_7DWT.meth.centerprofile.txt 3UTR_7D107.meth.centerprofile.txt \
 transposon_7DWT.meth.centerprofile.txt transposon_7D107.meth.centerprofile.txt \
---outFileName test3UTR7D.pdf \
---legend 11 \
+--outFileName transposon_3UTR_7D.pdf \
+--legend 11 --dpi 1000 \
 -l 3UTR_7DWT 3UTR_7D107 transposon_7DWT transposon_7D107 \
 -s 1 1 -xl up center down --context CG,CHG,CHH &
 
 python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f 3UTR_3DWT.meth.centerprofile.txt 3UTR_3D107.meth.centerprofile.txt \
+transposon_3DWT.meth.centerprofile.txt transposon_3D107.meth.centerprofile.txt \
+--outFileName transposon_3UTR_3D.pdf \
+--legend 11 --dpi 1000 \
+-l 3UTR_3DWT 3UTR_3D107 transposon_3DWT transposon_3D107 \
+-s 1 1 -xl up center down --context CG,CHG,CHH &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f 3UTR_0DWT.meth.centerprofile.txt 3UTR_0D107.meth.centerprofile.txt \
+transposon_0DWT.meth.centerprofile.txt transposon_0D107.meth.centerprofile.txt \
+--outFileName transposon_3UTR_0D.pdf \
+--legend 11 --dpi 1000 \
+-l 3UTR_0DWT 3UTR_0D107 transposon_0DWT transposon_0D107 \
+-s 1 1 -xl up center down --context CG,CHG,CHH &
+########################
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
 -f transposon_7DWT.meth.centerprofile.txt transposon_7D107.meth.centerprofile.txt \
 --outFileName transposon_7D.pdf \
---legend 11 \
+--legend 11 --dpi 1000 \
 -l transposon_7DWT transposon_7D107 \
 -s 1 1 -xl up center down --context CG,CHG,CHH &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f transposon_3DWT.meth.centerprofile.txt transposon_3D107.meth.centerprofile.txt \
+--outFileName transposon_3D.pdf \
+--legend 11 --dpi 1000 \
+-l transposon_3DWT transposon_3D107 \
+-s 1 1 -xl up center down --context CG,CHG,CHH &
+
+python /home/vcm/Batmeth2_download/BatMeth2/bin/bt2profile.py \
+-f transposon_0DWT.meth.centerprofile.txt transposon_0D107.meth.centerprofile.txt \
+--outFileName transposon_0D.pdf \
+--legend 11 --dpi 1000 \
+-l transposon_0DWT transposon_0D107 \
+-s 1 1 -xl up center down --context CG,CHG,CHH &
+########################
+
 
 #### Use this!!! AverMeth!!! for whole genome!!!
 *try AverMethylevel...*
